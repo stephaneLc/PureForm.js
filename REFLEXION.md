@@ -64,5 +64,5 @@ root/
 ├── js/
 │   └── main.js
 └── index.html
-...
+
 ```
