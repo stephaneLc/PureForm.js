@@ -13,7 +13,7 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
 - Mon hypothèse est qu'il est possible de créer un formulaire avec un JSON en le voyant comme une structure: 
 
 
-
+```
     {
         "form" : [
             {
@@ -30,7 +30,7 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
             }
         ]
     }
-
+```
 
 
 - Il sera possible d'afficher certains éléments du JSON avec l'utilisation du JavaScript. 
