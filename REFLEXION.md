@@ -44,38 +44,22 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
 ## Structure du projet
 
 root/
-|       
-|____sass/
-|       |
-|       |___base/
-|       |       |__root.scss
-|       |       |__variables.scss  
-|       |       
-|       |___module/
-|       |       |__bouton.scss
-|       |       |__formulaire.scss  
-|       |       |__main.scss  
-|       |       
-|       |___nav/
-|       |       |__header.scss
-|       |       |__footer.scss  
-|       |
-|       |
-|       |__stylesheet.scss
-|       
-|____css/
-|       |
-|       |__stylesheet.min.css
-|
-|
-|____ json/
-|       |
-|       |__formulaire.json
-|
-|
-|____ js/
-|       |
-|       |__main.js
-|
-|
-|____index.html
+├── sass/
+│   ├── base/
+│   │   ├── root.scss
+│   │   └── variables.scss
+│   ├── module/
+│   │   ├── bouton.scss
+│   │   ├── formulaire.scss
+│   │   └── main.scss
+│   ├── nav/
+│   │   ├── header.scss
+│   │   └── footer.scss
+│   └── stylesheet.scss
+├── css/
+│   └── stylesheet.min.css
+├── json/
+│   └── formulaire.json
+├── js/
+│   └── main.js
+└── index.html
