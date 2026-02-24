@@ -43,6 +43,7 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
 
 ## Structure du projet
 
+```
 root/
 ├── sass/
 │   ├── base/
@@ -63,3 +64,5 @@ root/
 ├── js/
 │   └── main.js
 └── index.html
+...
+```
