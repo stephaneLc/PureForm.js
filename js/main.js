@@ -19,6 +19,28 @@ async function getJsonData(){
 
         document.getElementById("form").appendChild(titreBalise); //afficher le titre en h2
 
+        const containerInput = document.createElement("div");
+        containerInput.className = "inputLabel";
+
+        const label = document.createElement("label");
+        label.innerHTML = infosJson.form[0].champs[0].label;
+
+        const errorMessage = document.createElement("p");
+        errorMessage.className = "error";
+        errorMessage.innerHTML = infosJson.form[0].champs[0].erreurMessage;
+
+        const input = document.createElement(infosJson.form[0].champs[0].nomBalise); 
+        input.setAttribute("type", infosJson.form[0].champs[0].type);
+        input.setAttribute("name", infosJson.form[0].champs[0].name);
+        input.setAttribute("value", "");
+
+        containerInput.appendChild(label);
+        containerInput.appendChild(errorMessage);
+        containerInput.appendChild(input);
+        
+                            
+        document.getElementById("form").appendChild(containerInput);
+
         
        
     } catch (error) {

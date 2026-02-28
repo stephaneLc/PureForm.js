@@ -6,6 +6,7 @@
                 {
                     "nomBalise" : "input",
                     "type" : "email",
+                    "name" : "email",
                     "label" : "Courriel",
                     "obligatoire" : true,
                     "erreurMessage" : "Le courriel doit être dans le format"
