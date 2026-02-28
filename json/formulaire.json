@@ -1,0 +1,16 @@
+{
+    "form" : [
+        {
+            "titre" : "formulaire contact en json",
+            "champs" : [
+                {
+                    "nomBalise" : "input",
+                    "type" : "email",
+                    "label" : "Courriel",
+                    "obligatoire" : true,
+                    "erreurMessage" : "Le courriel doit être dans le format"
+                }
+            ]
+        }
+    ]
+}
