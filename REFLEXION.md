@@ -33,13 +33,39 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
 ```
 
 
-- Il sera possible d'afficher certains éléments du JSON avec l'utilisation du JavaScript. 
+- Il sera possible d'afficher certains éléments du JSON avec l'utilisation du JavaScript.
 
 
 - J'ai un doute pour générer entièrement l'input de la structure HTML avec les actions reliées à ceux-ci. 
 
 
 - PHP pour permettre l'envoi du formulaire. 
+
+
+## Réflexion et mise au point
+
+    > Il sera possible d'afficher certains éléments du JSON avec l'utilisation du JavaScript.
+
+        **Confirmé** - il est possible d'afficher les éléments du JSON avec JavaScript. 
+
+    > J'ai un doute pour générer entièrement l'input de la structure HTML avec les actions reliées à ceux-ci
+
+        **Confirmé** - il est possible de générer entièrement l'input avec le JSON
+        
+        *Note* j'ai ajusté le JSON pour ajouter les attributs  
+        
+    *Les actions reliées à ceux-ci restent à valider.* 
+
+    **Limite la version actuelle**
+
+    La version actuelle n'est pas optimale, ni maintenanble si on ajouter d'autres inputs au JSON
+    La raison est qu'il faut écrire le code pour chaque nouveau champ
+
+    **Piste de solution d'optimisation**
+    
+    Une boucle pour passer au travers du JSON. 
+    La manière pour afficher les éléments reste à déterminer. 
+
 
 ## Structure du projet
 
