@@ -66,6 +66,18 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
     Une boucle pour passer au travers du JSON. 
     La manière pour afficher les éléments reste à déterminer. 
 
+    **Confirmé** - Une boucle permet de passer au travers du JSON. Par contre, j'ai réalisé qu'une deuxième boucle est nécessaire pour afficher les informations du deuxième niveau pour obtenir les informations pour créer l'input et les suivantes.  
+    
+    Affichage, j'ai pu récupérer le code de l'affichage et l'adapter avec la boucle. L'affichage de l'input que j'ai dû revoir le code d'affichage parce que j'étais déjà dans l'objet et l'index n'était plus nécessaire à cette étape. 
+
+    J'ai déplacé le code d'affichage dans une autre fonction pour alléger la fonction et de respecter le principe d'une responsabilité par fonction. 
+
+    **Prochaine étape**
+
+    - Ajuster le JSON pour afficher tous les éléments d'un formulaire final.
+    - Je pense que je vais devoir ajouter des lignes de code pour afficher les éléments manquants. 
+    - Le code d'affichage final devra probablement être revu.
+
 
 ## Structure du projet
 
