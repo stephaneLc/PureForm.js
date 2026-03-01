@@ -10,6 +10,14 @@
                     "label" : "Courriel",
                     "obligatoire" : true,
                     "erreurMessage" : "Le courriel doit être dans le format"
+                },
+                {
+                    "nomBalise" : "input",
+                    "type" : "text",
+                    "name" : "nom",
+                    "label" : "Nom et prénom",
+                    "obligatoire" : true,
+                    "erreurMessage" : "Le champs est obligatoire"
                 }
             ]
         }
