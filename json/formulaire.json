@@ -2,6 +2,14 @@
     "form" : [
         {
             "titre" : "formulaire contact en json",
+            "formulaire" : [ 
+                 {
+                    "balise" : "form",
+                    "action" : "",
+                    "methode" : "get",
+                    "id" : "form"
+                 }
+            ],
             "champs" : [
                 {
                     "nomBalise" : "input",
@@ -18,6 +26,13 @@
                     "label" : "Nom et prénom",
                     "obligatoire" : true,
                     "erreurMessage" : "Le champs est obligatoire"
+                }
+            ],
+            "button" :  [
+                {
+                    "nomBalise": "button",
+                    "text" : "Envoyer",
+                    "type" : "submit"
                 }
             ]
         }
