@@ -29,39 +29,45 @@ async function afficherFormulaire() {
             throw new Error("Les données ne sont pas disponible");
         }
 
-        dataJson.form.forEach((element,index) => {
-            
-            const titreBalise = document.createElement("h2"); //création de la balise
-            titreBalise.innerHTML = dataJson.form[index].titre; //ajouter le titre entre les balises
 
-            document.getElementById("form").appendChild(titreBalise);
+        dataJson.form.forEach(element =>{
 
-            //console.log(element);
-            //console.log(index);
-            //console.log(element.titre); 
-            //console.log(element.champs);
-            //console.log(element.champs[index]);
-            //console.log(element.champs[0].nomBalise);
+            console.log('element', element);
 
-            //console.log(element.champs[0]);
+            const titreBalise = document.createElement("h2");
+            titreBalise.innerHTML =  element.titre;
+            document.getElementById("divForm").appendChild(titreBalise);
+           
+            //console.log('titre', element.titre);
 
-            element.champs.forEach((champs, indexChamps) => {
-                //console.log(champs)
-                //console.log(indexChamps);
+            element.formulaire.forEach(formulaire => {
+                //console.log('formulaire', formulaire);
+
+                const form = document.createElement(formulaire.balise);
+                form.setAttribute("action", formulaire.action);
+                form.setAttribute("methode",formulaire.methode);
+                form.setAttribute("id",formulaire.id);
+
+                document.getElementById("divForm").appendChild(form);
+                //console.log(form);
+            });
+
+            element.champs.forEach(champ => {
+                //console.log('champ', champ);
 
                 const containerInput = document.createElement("div");
                 containerInput.className = "inputLabel";
 
                 const label = document.createElement("label");
-                label.innerHTML = champs.label;
+                label.innerHTML = champ.label;
 
                 const errorMessage = document.createElement("p");
                 errorMessage.className = "error";
-                errorMessage.innerHTML = champs.erreurMessage;
+                errorMessage.innerHTML = champ.erreurMessage;
 
-                const input = document.createElement(champs.nomBalise); 
-                input.setAttribute("type", champs.type);
-                input.setAttribute("name", champs.name);
+                const input = document.createElement(champ.nomBalise); 
+                input.setAttribute("type", champ.type);
+                input.setAttribute("name", champ.name);
                 input.setAttribute("value", "");
 
                 containerInput.appendChild(label);
@@ -69,10 +75,22 @@ async function afficherFormulaire() {
                 containerInput.appendChild(input);
                 
                 document.getElementById("form").appendChild(containerInput);
+
+
             });
 
+            element.button.forEach(bouton =>{
+                console.log('bouton', bouton.nomBalise);
+                const btn = document.createElement(bouton.nomBalise);
+                btn.setAttribute("type",bouton.submit);
+                btn.textContent = bouton.text
+
+                document.getElementById("form").appendChild(btn);
+
+            });
 
         });
+
 
     } catch (error) {
         console.log("une erreur" + error);
