@@ -72,11 +72,36 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
 
     J'ai déplacé le code d'affichage dans une autre fonction pour alléger la fonction et de respecter le principe d'une responsabilité par fonction. 
 
+
     **Prochaine étape**
 
     - Ajuster le JSON pour afficher tous les éléments d'un formulaire final.
+
+    **Confirmé** - J'ai ajouté l'élément bouton et le formulaire avec leur attribut au JSON.
+
     - Je pense que je vais devoir ajouter des lignes de code pour afficher les éléments manquants. 
+
+    **Confirmé** - J'ai ajouté des lignes de code pour les nouveaux éléments parce que la structure est différente. 
+
     - Le code d'affichage final devra probablement être revu.
+
+    **Constat** - Il n'a pas eu besoin de revoir le code d'affichage. Il y a eu des ajouts avec les nouveaux éléments.
+    
+    **Constat** - J'ai pu optimiser la boucle pour que la fonction soit maintenable si on ajoute d'autres inputs au JSON. Par contre, j'ai constaté la limite lorsque la structure est différente. De plus, je trouvais que la maintenabilité lors de modification ou d'ajout serait plus compliquée à effectuer dont moins efficace. 
+
+    **Solution retenue** 
+
+    Créer une boucle par bloc de la même structure. Cette solution est plus claire en termes de maintenabilité pour ajouter ou modifier la fonction lors de l'évolution du JSON. 
+
+
+    **Dernière étape**
+
+    - Ajouter les fonctions de vérifications des champs
+
+    **Exploration - Envoi du formulaire**
+
+    - Je vais utiliser Fetch API que je ne connais pas pour l'explorer pour l'envoi du formulaire au lieu de PHP que je connais. 
+
 
 
 ## Structure du projet
