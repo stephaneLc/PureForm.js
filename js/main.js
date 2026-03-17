@@ -80,9 +80,9 @@ async function afficherFormulaire() {
             });
 
             element.button.forEach(bouton =>{
-                console.log('bouton', bouton.nomBalise);
+                //console.log('bouton', bouton.nomBalise);
                 const btn = document.createElement(bouton.nomBalise);
-                btn.setAttribute("type",bouton.submit);
+                btn.setAttribute("type",bouton.type);
                 btn.textContent = bouton.text
 
                 document.getElementById("form").appendChild(btn);
