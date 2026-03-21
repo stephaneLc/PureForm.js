@@ -110,37 +110,25 @@ async function sendForm(form,jsonData) {
 
     btnSubmit.addEventListener('click', function(event){
         event.preventDefault();
-        //alert('btn cliquer');
-        //console.log('formAddListener', form);
-        //console.log('inputs', inputs);
-        //console.log('jsonDataPasser', jsonData);
-        //console.log('obligatoire', jsonData.obligatoire);
 
         inputs.forEach(input => {
             //console.log('input.value', input.value);
+            //console.log('jsonData', jsonData);
 
-            jsonData.forEach( info => {
+            const comparatifInputJson = jsonData.find(jsonData => jsonData.name === input.name);
+            //console.log('comparatifInputJson', comparatifInputJson);
 
-                const infoInput = document.querySelector(`[name="${info.name}"]`);
-                const elementBefore = infoInput.previousElementSibling;
+            const infoInputError = document.querySelector(`[name="${input.name}"]`).previousElementSibling;
+            //console.log('infoInputError', infoInputError);
 
-                if(input.name === info.name && info.obligatoire == true && input.value ==''){
-                    
-                    //console.log('unNom', input.name);
-                    console.log(info.erreurMessage);
-                    console.log('infoInput', infoInput);
-                    //console.log('elementBefore', elementBefore);
-                    console.log('erreur');
-                    
-                    if(info.erreurMessage){
-                        elementBefore.style.display = "block";
-                    }
-
-                }else if (input.name === info.name && info.obligatoire == true && input.value !=''){
-                    elementBefore.style.display = "none";
-                }
-
-            });
+            if(comparatifInputJson && comparatifInputJson.obligatoire && input.value ==''){
+                //console.log('Entre condition optimisé');
+          
+                infoInputError.style.display = "block";
+                   
+            }else{
+                infoInputError.style.display = "none";
+            }
 
         });
         //debugger;
