@@ -26,6 +26,14 @@
                     "label" : "Nom et prénom",
                     "obligatoire" : true,
                     "erreurMessage" : "Le champs est obligatoire"
+                },
+                {
+                    "nomBalise" : "input",
+                    "type" : "text",
+                    "name" : "ville",
+                    "label" : "Ville",
+                    "obligatoire" : false,
+                    "erreurMessage" : ""
                 }
             ],
             "button" :  [
