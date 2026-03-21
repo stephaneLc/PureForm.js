@@ -88,7 +88,7 @@ async function afficherFormulaire() {
 
             });
 
-            sendForm(form,element.champs);
+            verifierChamps(form,element.champs);
 
         });
 
@@ -99,42 +99,103 @@ async function afficherFormulaire() {
 }
 
 
-async function sendForm(form,jsonData) {
-    //console.log("form",form);
-    //console.log('jsonData', jsonData);
+async function verifierChamps(form,jsonData) {
     
     const btnSubmit = document.querySelector("button");
     const inputs = document.querySelectorAll("input");
-    //console.log('btn',btnSubmit);
-
-
+  
     btnSubmit.addEventListener('click', function(event){
         event.preventDefault();
 
+        let formValide = true; 
+
         inputs.forEach(input => {
-            //console.log('input.value', input.value);
-            //console.log('jsonData', jsonData);
 
             const comparatifInputJson = jsonData.find(jsonData => jsonData.name === input.name);
-            //console.log('comparatifInputJson', comparatifInputJson);
 
             const infoInputError = document.querySelector(`[name="${input.name}"]`).previousElementSibling;
-            //console.log('infoInputError', infoInputError);
 
             if(comparatifInputJson && comparatifInputJson.obligatoire && input.value ==''){
-                //console.log('Entre condition optimisé');
           
                 infoInputError.style.display = "block";
+                formValide =  false;
                    
             }else{
+                
                 infoInputError.style.display = "none";
+
             }
 
         });
-        //debugger;
+       
+        if(formValide){
+            const formData = new FormData(form);
+            sendForm(formData,inputs);
+        }
+
         
     });
     
+}
+
+async function sendForm(params,inputs) {
+    //console.log('envoyer');
+    //console.log('params', params);
+    //console.log('url',document.URL);
+
+    try {
+        //console.log('params', params);
+        const objetParams = Object.fromEntries(params); // transforme donnée en objet pour un retour en JSON
+        //console.log('objetParams', objetParams);
+
+        //console.log('params avant envoi', params); // retourne un array
+        //console.log('json stringify', JSON.stringify(params)); //retourne vide
+
+        const response = await fetch("php/traitement.php",{
+            method: 'POST',
+            headers : {
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify(objetParams)
+        });
+
+        if(!response.ok){
+            throw new Error(`Statut de réponse: ${response.status}`);
+        }
+
+        const resultat = await response.json();
+        //console.log('resultat', resultat);
+        //console.log('resultat.succes', resultat.succes);
+        //console.log('resultat.donnees', resultat.donnees);
+
+        //console.log('response', response);
+
+        const messageSucces = document.createElement("p");
+        messageSucces.className = "succes";
+        messageSucces.innerHTML =  "Le formulaire a été envoyé avec succès avec les infos suivante: ";
+
+     
+        document.getElementById("divForm").appendChild(messageSucces);
+
+        for (const clef in resultat.donnees){
+            //console.log(clef,  resultat.donnees[clef]);
+            const ligneResultat = document.createElement("p");
+            ligneResultat.className = "resultat";
+             ligneResultat.textContent = `${clef}: ${resultat.donnees[clef]}`;
+            //console.log('clefDonneesHmtl', clefDonneesHmtl);
+            //clefDonnees.textContent += resultat.donnees[clef];
+            //console.log( clefDonnees.textContent)
+            document.getElementById("divForm").appendChild(ligneResultat);
+        }
+
+        //permet de vider les inputs rempli
+        inputs.forEach(input =>{
+            input.value = "";
+        })
+
+    } catch (error) {
+        console.error("Erreur",error);
+    }
 }
 
 
