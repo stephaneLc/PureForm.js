@@ -32,7 +32,7 @@ async function afficherFormulaire() {
 
         dataJson.form.forEach(element =>{
 
-            console.log('element', element);
+            //console.log('element', element);
 
             const titreBalise = document.createElement("h2");
             titreBalise.innerHTML =  element.titre;
@@ -54,7 +54,6 @@ async function afficherFormulaire() {
 
             element.champs.forEach(champ => {
                 //console.log('champ', champ);
-
                 const containerInput = document.createElement("div");
                 containerInput.className = "inputLabel";
 
@@ -89,12 +88,66 @@ async function afficherFormulaire() {
 
             });
 
-        });
+            sendForm(form,element.champs);
 
+        });
 
     } catch (error) {
         console.log("une erreur" + error);
     }
+
 }
+
+
+async function sendForm(form,jsonData) {
+    //console.log("form",form);
+    //console.log('jsonData', jsonData);
+    
+    const btnSubmit = document.querySelector("button");
+    const inputs = document.querySelectorAll("input");
+    //console.log('btn',btnSubmit);
+
+
+    btnSubmit.addEventListener('click', function(event){
+        event.preventDefault();
+        //alert('btn cliquer');
+        //console.log('formAddListener', form);
+        //console.log('inputs', inputs);
+        //console.log('jsonDataPasser', jsonData);
+        //console.log('obligatoire', jsonData.obligatoire);
+
+        inputs.forEach(input => {
+            //console.log('input.value', input.value);
+
+            jsonData.forEach( info => {
+
+                const infoInput = document.querySelector(`[name="${info.name}"]`);
+                const elementBefore = infoInput.previousElementSibling;
+
+                if(input.name === info.name && info.obligatoire == true && input.value ==''){
+                    
+                    //console.log('unNom', input.name);
+                    console.log(info.erreurMessage);
+                    console.log('infoInput', infoInput);
+                    //console.log('elementBefore', elementBefore);
+                    console.log('erreur');
+                    
+                    if(info.erreurMessage){
+                        elementBefore.style.display = "block";
+                    }
+
+                }else if (input.name === info.name && info.obligatoire == true && input.value !=''){
+                    elementBefore.style.display = "none";
+                }
+
+            });
+
+        });
+        //debugger;
+        
+    });
+    
+}
+
 
 afficherFormulaire();
