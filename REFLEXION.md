@@ -56,51 +56,73 @@ Je me demandais s'il était possible de créer un formulaire en utilisant unique
         
     *Les actions reliées à ceux-ci restent à valider.* 
 
-    **Limite la version actuelle**
+**Limite la version actuelle**
 
     La version actuelle n'est pas optimale, ni maintenanble si on ajouter d'autres inputs au JSON
     La raison est qu'il faut écrire le code pour chaque nouveau champ
 
-    **Piste de solution d'optimisation**
+**Piste de solution d'optimisation**
     
     Une boucle pour passer au travers du JSON. 
     La manière pour afficher les éléments reste à déterminer. 
 
-    **Confirmé** - Une boucle permet de passer au travers du JSON. Par contre, j'ai réalisé qu'une deuxième boucle est nécessaire pour afficher les informations du deuxième niveau pour obtenir les informations pour créer l'input et les suivantes.  
+**Confirmé** - Une boucle permet de passer au travers du JSON. Par contre, j'ai réalisé qu'une deuxième boucle est nécessaire pour afficher les informations du deuxième niveau pour obtenir les informations pour créer l'input et les suivantes.  
     
     Affichage, j'ai pu récupérer le code de l'affichage et l'adapter avec la boucle. L'affichage de l'input que j'ai dû revoir le code d'affichage parce que j'étais déjà dans l'objet et l'index n'était plus nécessaire à cette étape. 
 
     J'ai déplacé le code d'affichage dans une autre fonction pour alléger la fonction et de respecter le principe d'une responsabilité par fonction. 
 
 
-    **Prochaine étape**
+**Prochaine étape**
 
     - Ajuster le JSON pour afficher tous les éléments d'un formulaire final.
 
-    **Confirmé** - J'ai ajouté l'élément bouton et le formulaire avec leur attribut au JSON.
+**Confirmé** - J'ai ajouté l'élément bouton et le formulaire avec leur attribut au JSON.
 
     - Je pense que je vais devoir ajouter des lignes de code pour afficher les éléments manquants. 
 
-    **Confirmé** - J'ai ajouté des lignes de code pour les nouveaux éléments parce que la structure est différente. 
+**Confirmé** - J'ai ajouté des lignes de code pour les nouveaux éléments parce que la structure est différente. 
 
     - Le code d'affichage final devra probablement être revu.
 
-    **Constat** - Il n'a pas eu besoin de revoir le code d'affichage. Il y a eu des ajouts avec les nouveaux éléments.
+**Constat** - Il n'a pas eu besoin de revoir le code d'affichage. Il y a eu des ajouts avec les nouveaux éléments.
     
-    **Constat** - J'ai pu optimiser la boucle pour que la fonction soit maintenable si on ajoute d'autres inputs au JSON. Par contre, j'ai constaté la limite lorsque la structure est différente. De plus, je trouvais que la maintenabilité lors de modification ou d'ajout serait plus compliquée à effectuer dont moins efficace. 
+**Constat** - J'ai pu optimiser la boucle pour que la fonction soit maintenable si on ajoute d'autres inputs au JSON. Par contre, j'ai constaté la limite lorsque la structure est différente. De plus, je trouvais que la maintenabilité lors de modification ou d'ajout serait plus compliquée à effectuer dont moins efficace. 
 
-    **Solution retenue** 
+
+**Solution retenue** 
 
     Créer une boucle par bloc de la même structure. Cette solution est plus claire en termes de maintenabilité pour ajouter ou modifier la fonction lors de l'évolution du JSON. 
 
 
-    **Dernière étape**
+**Dernière étape**
 
     - Ajouter les fonctions de vérifications des champs
 
-    **Exploration - Envoi du formulaire**
+    **Confirmé** - J'ai ajouté la fonction permettant de vérifier si le champ est obligatoire et s'il a été rempli pour poursuivre le processus ou d'afficher le message aux champs qui n'a pas rempli les conditions. 
+
+    **Constat** - initialement, j'avais utilisé deux forEach pour comparer les entrées du formulaire avec l'information du JSON  pour déterminer si le champ était obligatoire. J'ai constaté que le if/else n'était pas le résultat attendu parce que le forEach repassait le JSON à chaque entrée. J'ai dû préciser la deuxième condition pour obtenir le résultat attendu. 
+
+    Je trouvais que ce n'était pas optimal comme processus. 
+
+
+**Solution optimisée**
+
+    J'ai trouvé la méthode find() qui permet de faire un comparatif avec le JSON et les inputs du formulaire sans repasser le JSON à chaque inputs. Il permet d'obtenir la condition if/else avec le résultat attendu. 
+
+
+**Exploration - Envoi du formulaire**
 
     - Je vais utiliser Fetch API que je ne connais pas pour l'explorer pour l'envoi du formulaire au lieu de PHP que je connais. 
+
+    **Confirmé** - J'ai utilisé le Fetch API qui fonctionne bien pour l'envoi des données. 
+
+**Constat** - J'ai eu besoin d'un fichier PHP pour le traitement des données malgré ma compréhension initiale avec Fetch API. 
+
+    J'ai jugé qu'il était préférable d'utiliser PHP que je connais mieux que Node.js. Cette décision était pour m'assurer de focaliser sur Fetch API avec ce qu'il doit retourner et d'éviter des conflits de résultat avec Node.js.  
+
+**Constat** - Il a fallu que j'ajoute une boucle pour effacer les inputs parce qu'il n'y avait pas de rechargement de la page. 
+
 
 
 
