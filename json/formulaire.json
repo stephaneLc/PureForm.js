@@ -1,0 +1,69 @@
+{
+    "titre" : {
+                "fr" : "",
+                "en" : ""
+            },
+    "form" : {
+            "tag" : "",
+            "id" : "",
+            "class" : "",
+            "action": "",
+            "method" : ""
+        },
+    "fields" : [
+        {
+            "tag" : "",
+            "class" : "",
+            "id" : "",
+            "type" : "",
+            "label" : {
+                "fr" : "",
+                "en" : ""
+            },
+            "name" : "",
+            "validation" : {
+                "required" : {
+                        "value" : true,
+                        "message" : {
+                            "fr" : "",
+                            "en" : ""
+                        }
+                    },
+                "format" : {
+                    "pattern" : "",
+                    "message" : {
+                        "fr" : "",
+                        "en" : ""
+                    }
+                }
+            },
+            "options" : [
+                {
+                    "value" : "",
+                    "text" : {
+                        "fr" : "",
+                        "en" : ""
+                    }
+                },
+                {
+                    "value" : "",
+                    "text" : {
+                        "fr" : "",
+                        "en" : ""
+                    }
+                }
+            ]
+
+        }
+    ],
+    "button" : {
+            "tag" : "",
+            "id" : "",
+            "class" : "",
+            "type" : "",
+            "text" : {
+                "fr" : "",
+                "en" : ""
+            }
+        }
+}
