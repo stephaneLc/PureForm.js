@@ -1,69 +1,293 @@
 {
     "titre" : {
-                "fr" : "",
-                "en" : ""
+                "fr" : "Formulaire de candidature pour développeur",
+                "en" : "Application form for developer"
             },
     "form" : {
-            "tag" : "",
-            "id" : "",
+            "tag" : "form",
+            "id" : "form",
             "class" : "",
             "action": "",
-            "method" : ""
+            "method" : "GET"
         },
     "fields" : [
         {
-            "tag" : "",
+            "tag" : "input",
             "class" : "",
             "id" : "",
-            "type" : "",
+            "type" : "text",
             "label" : {
-                "fr" : "",
-                "en" : ""
+                "fr" : "Prénom",
+                "en" : "First name"
             },
-            "name" : "",
+            "name" : "firstName",
             "validation" : {
                 "required" : {
                         "value" : true,
                         "message" : {
-                            "fr" : "",
-                            "en" : ""
+                            "fr" : "Vous devez entrer votre prénom",
+                            "en" : "You must enter your first name"
+                        }
+                    }
+            }
+        },
+        {
+            "tag" : "input",
+            "class" : "",
+            "id" : "",
+            "type" : "text",
+            "label" : {
+                "fr" : "Nom",
+                "en" : "Name"
+            },
+            "name" : "name",
+            "validation" : {
+                "required" : {
+                        "value" : false
+                    }
+
+            }
+        },
+        {
+            "tag" : "input",
+            "class" : "",
+            "id" : "",
+            "type" : "email",
+            "label" : {
+                "fr" : "Courriel",
+                "en" : "Email"
+            },
+            "name" : "email",
+            "validation" : {
+                "required" : {
+                        "value" : true,
+                        "message" : {
+                            "fr" : "Vous devez entrer votre courriel",
+                            "en" : "You must enter your email address"
                         }
                     },
                 "format" : {
-                    "pattern" : "",
+                    "pattern" : "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$",
                     "message" : {
-                        "fr" : "",
-                        "en" : ""
+                        "fr" : "Votre courriel doit être dans ce format: courriel@exemple.com",
+                        "en" : "Your email address must be in this format: email@example.com"
                     }
                 }
+            }
+        },
+        {
+            "tag" : "input",
+            "class" : "",
+            "id" : "",
+            "type" : "tel",
+            "label" : {
+                "fr" : "Téléphone",
+                "en" : "Phone"
+            },
+            "name" : "phoneNumber",
+            "validation" : {
+                "required" : {
+                        "value" : true,
+                        "message" : {
+                            "fr" : "Vous devez entrer votre numéro de téléphone",
+                            "en" : "You must enter your phone number"
+                        }
+                    },
+                "format" : {
+                    "pattern" : "^(\\+1)?[\\s\\-.]?\\(?\\d{3}\\)?[\\s\\-.]?\\d{3}[\\s\\-.]?\\d{4}$",
+                    "message" : {
+                        "fr" : "Le numéro de téléphone n'est pas dans le bon format 555-555-5555",
+                        "en" : "The phone number is not in the correct format: 555-555-5555"
+                    }
+                }
+            }
+        },
+        {
+            "tag" : "input",
+            "class" : "",
+            "id" : "",
+            "type" : "radio",
+            "label" : {
+                "fr" : "Disponibilité",
+                "en" : "Availability"
+            },
+            "name" : "availability",
+            "validation" : {
+                "required" : {
+                        "value" : true,
+                        "message" : {
+                            "fr" : "Vous devez faire un choix",
+                            "en" : "You must make a choice"
+                        }
+                    }
+
             },
             "options" : [
                 {
-                    "value" : "",
+                    "value" : "fullTime",
                     "text" : {
-                        "fr" : "",
-                        "en" : ""
+                        "fr" : "Temps plein",
+                        "en" : "Full time"
                     }
                 },
                 {
-                    "value" : "",
+                    "value" : "partTime",
                     "text" : {
-                        "fr" : "",
-                        "en" : ""
+                        "fr" : "Temps partiel",
+                        "en" : "Part time"
+                    }
+                },
+                {
+                    "value" : "contrat",
+                    "text" : {
+                        "fr" : "Contractuel",
+                        "en" : "Contractual"
                     }
                 }
             ]
 
+        },
+        {
+            "tag" : "input",
+            "class" : "",
+            "id" : "",
+            "type" : "checkbox",
+            "label" : {
+                "fr" : "Compétence",
+                "en" : "skill"
+            },
+            "name" : "skill",
+            "validation" : {
+                "required" : {
+                        "value" : true,
+                        "message" : {
+                            "fr" : "Vous devez faire au moins un choix",
+                            "en" : "You must make at least one choice"
+                        }
+                    }
+            },
+            "options" : [
+                {
+                    "value" : "html",
+                    "text" : {
+                        "fr" : "HTML",
+                        "en" : "HTML"
+                    }
+                },
+                {
+                    "value" : "css",
+                    "text" : {
+                        "fr" : "CSS",
+                        "en" : "CSS"
+                    }
+                },
+                {
+                    "value" : "php",
+                    "text" : {
+                        "fr" : "php",
+                        "en" : "php"
+                    }
+                },
+                {
+                    "value" : "sass",
+                    "text" : {
+                        "fr" : "Sass",
+                        "en" : "Sass"
+                    }
+                },
+                {
+                    "value" : "javascript",
+                    "text" : {
+                        "fr" : "JavaScript",
+                        "en" : "JavaScript"
+                    }
+                },
+                {
+                    "value" : "java",
+                    "text" : {
+                        "fr" : "Java",
+                        "en" : "Java"
+                    }
+                },
+                {
+                    "value" : "all",
+                    "text" : {
+                        "fr" : "Tous ces choix",
+                        "en" : "All these choices"
+                    }
+                }
+            ]
+        },
+        {
+            "tag" : "select",
+            "class" : "",
+            "id" : "",
+            "type" : "",
+            "label" : {
+                "fr" : "Votre expérience",
+                "en" : "Your experience"
+            },
+            "name" : "experience",
+            "validation" : {
+                "required" : {
+                        "value" : true,
+                        "message" : {
+                            "fr" : "Vous devez faire un choix",
+                            "en" : "You must make a choice"
+                        }
+                    }
+            },
+            "options" : [
+                {
+                    "value" : "junior",
+                    "text" : {
+                        "fr" : "Débutant",
+                        "en" : "Beginner"
+                    }
+                },
+                {
+                    "value" : "intermediaire",
+                    "text" : {
+                        "fr" : "Intermédiaire",
+                        "en" : "Intermediate"
+                    }
+                },
+                {
+                    "value" : "senior",
+                    "text" : {
+                        "fr" : "Senior",
+                        "en" : "Senior"
+                    }
+                }
+            ]
+
+        },
+        {
+            "tag" : "texarea",
+            "class" : "",
+            "id" : "",
+            "type" : "",
+            "label" : {
+                "fr" : "Message de motivation",
+                "en" : "Motivational message"
+            },
+            "name" : "message",
+            "validation" : {
+                "required" : {
+                        "value" : false
+                    }
+            }
         }
+
     ],
     "button" : {
-            "tag" : "",
+            "tag" : "button",
             "id" : "",
-            "class" : "",
-            "type" : "",
+            "class" : "btn-primary",
+            "type" : "submit",
             "text" : {
-                "fr" : "",
-                "en" : ""
+                "fr" : "Envoyer",
+                "en" : "Send"
             }
         }
 }
