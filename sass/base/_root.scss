@@ -1,0 +1,7 @@
+@use 'variables' as *;
+
+:root{
+
+    --color-primary : #{$color-primary};
+    --color-secondaray : #{$color-secondary};
+}
