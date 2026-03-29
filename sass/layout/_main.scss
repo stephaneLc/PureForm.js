@@ -1,0 +1,23 @@
+@use '../base' as *;
+
+body{
+    font-family: $font-principal;
+    font-size: var(--main-font-size);
+    line-height: var(--main-line-height);
+    color: var(--main-text-color);
+    background-color: var(--main-background-color);
+}
+
+.container{
+    
+    &__principal{
+        max-width: $max-with;
+        margin: 0 auto;
+    }
+
+    &__secondary{
+        background-color: var(--sec-container-bck-color);
+        padding: 20px;
+    }
+
+}

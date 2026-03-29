@@ -3,5 +3,28 @@
 :root{
 
     --color-primary : #{$color-primary};
-    --color-secondaray : #{$color-secondary};
+    --color-secondary : #{$color-secondary};
+    --color-white:   #{$color-white};
+    --color-gray:  #{$color-gray};
+
+    --font-size-xxl : 26px;
+    --font-size-lg : 22px;
+    --font-size-md : 18px;
+
+    --color-title : var(--color-primary);
+    --color-title-regular: var(--color-secondary);
+
+    --size-title-xxl: var(--font-size-xxl);
+    --size-tile-large: var(--font-size-lg);
+    --size-tile-regular: var(--font-size-md);
+
+    --main-text-color: var(--color-secondary);
+    --main-font-size: #{$font-base};
+    --main-line-height: #{$font-height};
+    --main-background-color: #{$main-background-color};
+
+    --sec-container-bck-color: var(--color-gray);
+    
+
 }
+
