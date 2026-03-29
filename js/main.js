@@ -2,8 +2,9 @@
 
 document.addEventListener("DOMContentLoaded", ()=>{
     const divForm = document.getElementById("divForm");
+    const language = 'fr';
 
-    getJson(divForm);
+    constructForm(divForm,language);
 });
 
 async function getJson(divForm){
@@ -19,6 +20,70 @@ async function getJson(divForm){
         return dataJson;
 
        
+    } catch (error) {
+        divForm.innerText = "Une erreur est survenu" + ' ' + error;
+    }
+}
+
+
+async function constructForm(divForm, language) {
+    try {
+        const dataJson = await getJson();
+
+        if(!dataJson) {
+            throw new Error("Les données ne sont pas disponible");
+        }
+
+        const titleForm = document.createElement("h2");
+                        titleForm.innerHTML = dataJson.titre[language];
+
+                        divForm.appendChild(titleForm);
+
+        const form = document.createElement(dataJson.form.tag);
+                    form.setAttribute("action", dataJson.form.action);
+                    form.setAttribute("methode",dataJson.form.method);
+                    form.setAttribute("id",dataJson.form.id);
+
+                    divForm.appendChild(form);
+
+        const btn = document.createElement(dataJson.button.tag);
+                    btn.setAttribute("type",dataJson.button.type);
+                    btn.textContent = dataJson.button.text[language];
+
+                    divForm.appendChild(btn);
+
+
+
+        dataJson.fields.forEach(formElement => {
+            
+            console.log('formElement', formElement);
+
+            const container = document.createElement("div");
+                            container.className = "inputLabel";
+
+            const label = document.createElement("label");
+                        label.innerHTML = formElement.label[language];
+
+            const errorMessage = document.createElement("p");
+                                errorMessage.className = "error";
+
+                                if(formElement.validation.required.message?.[language]){
+                                        errorMessage.innerHTML = formElement.validation.required.message[language]
+                                }
+
+            const tag = document.createElement(formElement.tag);
+                    tag.setAttribute("type", formElement.type);
+                    tag.setAttribute("name", formElement.name);
+                    tag.setAttribute("value", "");   
+                                
+
+                    
+            container.appendChild(label);
+            container.appendChild(errorMessage);
+            container.appendChild(tag);
+            divForm.appendChild(container);
+        });
+
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
     }
