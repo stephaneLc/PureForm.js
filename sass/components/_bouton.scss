@@ -1,6 +1,6 @@
 @use '../base' as *;
 
-@mixin button{
+%button{
     background-color: var(--btn-backgrond-color);
     color: var(--btn-text-color);
     border-radius: var(--btn-radius);
@@ -16,12 +16,12 @@
 .btn{
 
     &__primary{
-        @include button;
+         @extend %button;
         border-color: transparent;
     }
 
     &__secondary{
-        @include button;
+         @extend %button;
         background-color: var(--btn-second-backgrond-color);
         color: var(--btn-second-text-color);
 
