@@ -6,6 +6,7 @@
     --color-secondary : #{$color-secondary};
     --color-white:   #{$color-white};
     --color-gray:  #{$color-gray};
+    --color-orange: #{$color-orange};
 
     --font-size-xxl : 26px;
     --font-size-lg : 22px;
@@ -24,6 +25,17 @@
     --main-background-color: #{$main-background-color};
 
     --sec-container-bck-color: var(--color-gray);
+
+    --btn-backgrond-color: var(--color-primary);
+    --btn-backgrond-color-hover:var(--color-orange);
+    --btn-text-color: var(--color-white);
+    --btn-radius: 5px;
+    --btn-border: 1px solid #{$color-secondary};
+
+    --btn-second-backgrond-color: var(--color-gray);
+    --btn-second-backgrond-color-hover: var(--color-secondary);
+    --btn-second-text-color-hover: var(--color-white);
+    --btn-second-text-color: var(--color-secondary);
     
 
 }
