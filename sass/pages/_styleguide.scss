@@ -1,0 +1,48 @@
+@use '../base' as *;
+
+.section__color{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+
+    .container{
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.64);
+
+        &__color{
+            min-height: 64px;
+        }
+    }
+
+    .info{
+        padding: 8px 10px;
+        background: #fff;
+
+        p{
+            font-size: 11px;
+        }
+    } 
+
+    .primary{
+        background-color: #01257D;
+    }
+
+    .secondary{
+        background-color: #202020;
+    }
+
+    .gray{
+        background-color: #ececf0;
+    }
+
+    .white{
+        background-color: #f3f3f5;
+    }
+
+    .orange{
+        background-color: #FF7A00;
+    }
+
+}
