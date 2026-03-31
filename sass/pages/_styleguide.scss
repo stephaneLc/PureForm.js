@@ -1,5 +1,9 @@
 @use '../base' as *;
 
+h3{
+    border-bottom: 1px solid $color-secondary;
+}
+
 .section__color{
 
     display: grid;
