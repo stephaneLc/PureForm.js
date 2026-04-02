@@ -51,7 +51,28 @@
         &:focus-visible{
             outline: 1px solid $color-primary;
         }
-        
+
+    }
+
+    input[type="radio"]{
+        -webkit-appearance: none;
+        appearance: none;
+        border: 1px solid $color-secondary;
+        border-radius: 50%;
+        outline: none;
+        transition: 0.2s;
+        cursor: pointer;
+
+        &:focus {
+            border: 1px solid $color-primary;
+            outline: none;
+        }
+
+        &:checked{
+            background-color: $color-primary;
+            box-shadow: 0 0 0 2px $color-white, inset 0 0 0 2px $color-white; 
+            border: 1px solid $color-primary;
+        }
     }
 
     select{
@@ -59,6 +80,29 @@
         &:focus {
             border: 2px solid $color-primary;
             outline: none;
+        }
+
+    }
+
+    fieldset {
+
+        margin: 0;
+        padding: 0;
+        border: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        legend {
+            width: 100%;
+            padding: 0;
+        }
+
+        label{
+            width: fit-content;
+            display: flex; 
+            align-items: center;
+            gap: 10px;            
         }
 
     }
