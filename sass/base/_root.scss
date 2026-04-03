@@ -33,6 +33,16 @@
     --btn-second-text-color-hover: var(--color-white);
     --btn-second-text-color: var(--color-secondary);
 
+    --input-select-bck-color: var(--color-white);
+    --input-select-border-size: 1px;
+    --input-select-border-color: var(--color-secondary);
+
+    --input-select-focus-visible-size: 1px;
+    --input-select-focus-visible-color: var(--color-primary);
+
+    --select-border-size-focus: 2px;
+    --select-border-color-focus: var(--color-primary);
+
     --input-radio-size:#{$input-radio-size};
     --input-radio-border-radius: 50%;
 
