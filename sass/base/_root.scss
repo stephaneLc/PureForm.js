@@ -36,6 +36,20 @@
     --btn-second-backgrond-color-hover: var(--color-secondary);
     --btn-second-text-color-hover: var(--color-white);
     --btn-second-text-color: var(--color-secondary);
+
+    --input-checkbox-size: #{$input-checkbox-size};
+    --input-checkbox-border-color: var(--color-secondary);
+    --input-checkbox-border-size: 1px;
+
+    --input-checkbox-checked-bck-color: var(--color-primary);
+    --input-checkbox-checked-border-color :var(--color-primary);
+    --input-checkbox-checked-border-size : 1px;
+
+    --input-check-hook-border-size: 2px;
+    --input-check-hook-border-color: var(--color-white);
+
+    --input-label-checkbox-txt-color: var(--color-primary);
+    --input-label-checkbox-txt-bold: 400;
     
 
 }
