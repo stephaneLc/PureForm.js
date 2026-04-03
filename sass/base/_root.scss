@@ -37,6 +37,21 @@
     --btn-second-text-color-hover: var(--color-white);
     --btn-second-text-color: var(--color-secondary);
 
+    --input-radio-size:#{$input-radio-size};
+    --input-radio-border-radius: 50%;
+
+    --input-label-radio-txt-color: var(--color-primary);
+    --input-label-radio-txt-bold: 400;
+
+    --input-radio-border-color-hover: var(--color-primary);
+
+    --input-radio-border-color: var(--color-secondary);
+    --input-radio-border-size: 1px;
+
+    --input-radio-checked-bck-color: var(--color-primary);
+    --input-radio-checked-border-color :var(--color-primary);
+    --input-radio-checked-border-size : 1px;
+
     --input-checkbox-size: #{$input-checkbox-size};
     --input-checkbox-border-color: var(--color-secondary);
     --input-checkbox-border-size: 1px;
@@ -47,6 +62,8 @@
 
     --input-check-hook-border-size: 2px;
     --input-check-hook-border-color: var(--color-white);
+
+    --input-checkbox-border-color-hover:var(--color-primary);
 
     --input-label-checkbox-txt-color: var(--color-primary);
     --input-label-checkbox-txt-bold: 400;
