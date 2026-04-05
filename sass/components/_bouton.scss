@@ -1,0 +1,33 @@
+@use '../base' as *;
+
+%button{
+    background-color: var(--btn-backgrond-color);
+    color: var(--btn-text-color);
+    border-radius: var(--btn-radius);
+    border: var(--btn-border);
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: var(--btn-backgrond-color-hover);
+    }
+}
+
+.btn{
+
+    &__primary{
+         @extend %button;
+        border-color: transparent;
+    }
+
+    &__secondary{
+         @extend %button;
+        background-color: var(--btn-second-backgrond-color);
+        color: var(--btn-second-text-color);
+
+        &:hover{
+            background-color: var(--btn-second-backgrond-color-hover);
+            color: var(--btn-second-text-color-hover);
+        }
+    }
+}

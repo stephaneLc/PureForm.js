@@ -1,0 +1,28 @@
+@use 'variables' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+
+%fontTitle{
+    font-family: $font-title;
+    font-weight: $font-bold;
+    color: var(--color-title);
+}
+
+h1{
+    @extend %fontTitle;
+    font-size: var(--size-title-xxl);
+}
+
+h2{
+    @extend %fontTitle;
+    font-size: var(--size-tile-large);;
+}
+
+h3{
+    @extend %fontTitle;
+    font-size: var(--size-tile-regular);
+    font-weight: $font-height;
+    color: var(--color-title-regular);
+}
+    

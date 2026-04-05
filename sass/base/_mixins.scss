@@ -1,0 +1,19 @@
+@use 'variables' as *;
+@use 'sass:map'; //module from sass
+
+$breakpoints: (
+    'mobile': $bp-mobile,
+    'tablet': $bp-tablet,
+    'desktop': $bp-desktop,
+    'large' : $bp-large
+);
+
+@mixin BP($breakpoint) {
+    @if map.get($breakpoints, $breakpoint) {
+        @media (min-width: map.get($breakpoints, $breakpoint)) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint `#{$breakpoint}` introuvable.";
+    }
+}

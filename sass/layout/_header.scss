@@ -1,0 +1,42 @@
+@use '../base' as *;
+
+header{
+
+    .header{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        padding: 25px 0;
+
+        @include BP(mobile){
+            flex-direction: row;
+        }
+
+        .logo{
+            width: 100%;
+            min-width: 60px;
+            max-width: 60px;
+        }
+
+        &__container{
+
+            h1{
+                text-align: center;
+                font-size: clamp(2.5rem, 3vw, 3.25rem);
+                margin: 0;
+                padding: 0;
+            }
+
+            p{
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+
+        }
+
+    }
+
+}

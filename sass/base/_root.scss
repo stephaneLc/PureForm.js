@@ -1,0 +1,81 @@
+@use 'variables' as *;
+
+:root{
+
+    --color-primary : #{$color-primary};
+    --color-secondary : #{$color-secondary};
+    --color-white:   #{$color-white};
+    --color-gray:  #{$color-gray};
+    --color-orange: #{$color-orange};
+
+    --color-title : var(--color-primary);
+    --color-title-regular: var(--color-secondary);
+
+    --size-title-xxl: clamp(2.5rem, 3vw, 2.25rem);
+    --size-tile-large: clamp(1.25rem, 2.5vw, 1.875rem);
+    --size-tile-regular: clamp(1rem, 2vw, 1.5625rem);
+
+    --main-text-color: var(--color-secondary);
+    --main-font-size: #{$font-base};
+    --main-line-height: #{$font-height};
+    --main-background-color: #{$main-background-color};
+
+    --sec-container-bck-color: var(--color-gray);
+
+    --btn-backgrond-color: var(--color-primary);
+    --btn-backgrond-color-hover:var(--color-orange);
+    --btn-text-color: var(--color-white);
+    --btn-radius: 5px;
+    --btn-border: 1px solid #{$color-secondary};
+
+    --btn-second-backgrond-color: var(--color-gray);
+    --btn-second-backgrond-color-hover: var(--color-secondary);
+    --btn-second-text-color-hover: var(--color-white);
+    --btn-second-text-color: var(--color-secondary);
+
+    --input-select-bck-color: var(--color-white);
+    --input-select-border-size: 1px;
+    --input-select-border-color: var(--color-secondary);
+
+    --input-select-focus-visible-size: 1px;
+    --input-select-focus-visible-color: var(--color-primary);
+    --input-select-active-color: var(--color-primary);
+
+    --select-border-size-focus: 2px;
+    --select-border-color-focus: var(--color-primary);
+    --select-border-color-option-selected: var(--color-primary);
+
+    --input-radio-size:#{$input-radio-size};
+    --input-radio-border-radius: 50%;
+
+    --input-label-radio-txt-color: var(--color-primary);
+    --input-label-radio-txt-bold: 400;
+
+    --input-radio-border-color-hover: var(--color-primary);
+
+    --input-radio-border-color: var(--color-secondary);
+    --input-radio-border-size: 1px;
+
+    --input-radio-checked-bck-color: var(--color-primary);
+    --input-radio-checked-border-color :var(--color-primary);
+    --input-radio-checked-border-size : 1px;
+
+    --input-checkbox-size: #{$input-checkbox-size};
+    --input-checkbox-border-color: var(--color-secondary);
+    --input-checkbox-border-size: 1px;
+
+    --input-checkbox-checked-bck-color: var(--color-primary);
+    --input-checkbox-checked-border-color :var(--color-primary);
+    --input-checkbox-checked-border-size : 1px;
+
+    --input-check-hook-border-size: 2px;
+    --input-check-hook-border-color: var(--color-white);
+
+    --input-checkbox-border-color-hover:var(--color-primary);
+
+    --input-label-checkbox-txt-color: var(--color-primary);
+    --input-label-checkbox-txt-bold: 400;
+    
+
+}
+
