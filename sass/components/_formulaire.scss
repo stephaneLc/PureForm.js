@@ -38,6 +38,12 @@
                 background: linear-gradient(to bottom, $color-gray 50%, $color-white 50%);
             }
 
+            &:has(+ label.active){
+                border-color: var(--input-select-active-color);
+
+            }
+            
+
         }
 
     }
