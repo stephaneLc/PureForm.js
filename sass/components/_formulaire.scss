@@ -160,6 +160,10 @@
             outline: none;
         }
 
+        &.active{
+            border-color: var(--select-border-color-option-selected);
+        }
+
     }
 
     fieldset {

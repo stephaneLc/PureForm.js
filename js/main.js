@@ -1,8 +1,6 @@
-const inputs = document.getElementsByTagName('input');
-
 function floatingLabelsOnInput(){
   
-    document.querySelectorAll('input').forEach( input => {
+    document.querySelectorAll("input").forEach( input => {
 
         if(input.type !== "radio" && input.type !=="checkbox"){
 
@@ -31,5 +29,34 @@ function floatingLabelsOnInput(){
 
 }
 
+function optionSelected(){
+
+    document.querySelectorAll("select").forEach(select => {
+
+        if(select.value !== ''){
+            console.log('a un option');
+            select.classList.add("active");
+        }else{
+            console.log('pas select');
+            select.classList.remove("active");
+        }
+
+        select.addEventListener("change", () =>{
+
+            if(select.value !== ''){
+                console.log('a un option');
+                select.classList.add("active");
+            }else{
+                console.log('pas select');
+                select.classList.remove("active");
+            }
+
+        });
+
+    });
+
+}
+
 floatingLabelsOnInput();
+optionSelected();
 
