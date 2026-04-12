@@ -72,10 +72,10 @@ async function constructForm(divForm, language) {
 
 
             const tag = document.createElement(formElement.tag);
-                    tag.setAttribute("type", formElement.type);
+                    /* tag.setAttribute("type", formElement.type); */
                     tag.setAttribute("name", formElement.name);
                     tag.setAttribute("id", formElement.id);
-                    tag.setAttribute("value", "");   
+                   /*  tag.setAttribute("value", "");    */
                                 
             switch (formElement.tag) {
                 case "select":
@@ -95,6 +95,43 @@ async function constructForm(divForm, language) {
                 break;
 
                 default:
+
+                    switch (formElement.type) {
+                        case 'radio':
+                        case 'checkbox':
+                                const fieldset = document.createElement('fieldset');
+                                const legend = document.createElement('legend');
+
+                                legend.innerHTML = formElement.label[language];
+
+                                formElement.options.forEach(option => {
+                                    
+                                    const radioCheckInput = document.createElement(formElement.tag); 
+                                    const label = document.createElement("label");
+                                   
+                                    label.innerHTML = option.text[language];
+
+                                    radioCheckInput.setAttribute("name", formElement.name);
+                                    radioCheckInput.setAttribute("id", formElement.id);
+                                    radioCheckInput.setAttribute("type",formElement.type);
+                                    radioCheckInput.setAttribute("value", option.value);
+
+                                    label.appendChild(radioCheckInput);
+                                    fieldset.appendChild(label);
+
+                                });
+                                 
+                                fieldset.appendChild(legend);
+                                divForm.appendChild(fieldset);
+
+                            break;
+                    
+                        default:
+                            tag.setAttribute("type", formElement.type);        
+                            /* tag.setAttribute("id", formElement.id) */
+                            tag.setAttribute("value", ""); 
+                        break;
+                    }
 
                 break;
             }
