@@ -75,9 +75,7 @@ async function constructForm(divForm, language) {
                     const labelSelect = document.createElement("label");
                                 labelSelect.setAttribute("for", formElement.id);
                                 labelSelect.innerHTML = formElement.label[language];
-                                      
-                    const option = document.createElement("option");
-                        
+                                
                     formElement.options.forEach(option =>{
                            tagSelect.add(new Option(option.text[language],option.value));
                            
@@ -94,7 +92,6 @@ async function constructForm(divForm, language) {
                         case 'radio':
                         case 'checkbox':
 
-                            const tagRadioCheckbox = document.createElement(formElement.tag);
                             const fieldset = document.createElement('fieldset');
                             const legend = document.createElement('legend');
 
