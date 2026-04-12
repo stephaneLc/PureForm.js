@@ -83,12 +83,6 @@ async function constructForm(divForm, language) {
 
                 break;
 
-                case "textarea":
-                    console.log('texarea');
-                    tag.setAttribute("rows", 10);
-                    tag.setAttribute("cols",50);
-                break;
-
                 default:
 
                     switch (formElement.type) {
@@ -135,6 +129,11 @@ async function constructForm(divForm, language) {
                 break;
             }
                     
+            if(formElement.tag == 'textarea'){
+                tag.setAttribute("rows", 10);
+                tag.setAttribute("cols",50);
+            }
+
             container.appendChild(tag);
             divForm.appendChild(container);
             divForm.appendChild(btn);
