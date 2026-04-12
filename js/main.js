@@ -68,6 +68,8 @@ async function constructForm(divForm, language) {
 
             switch (formElement.tag) {
                 case "select":
+                    const containerSelect = document.createElement("div");
+    
                     const tagSelect = document.createElement(formElement.tag);
                                       tagSelect.setAttribute("name", formElement.name);
                                       tagSelect.setAttribute("id", formElement.id);
@@ -81,8 +83,9 @@ async function constructForm(divForm, language) {
                            
                     });
 
-                    container.appendChild(labelSelect);
-                    container.appendChild(tagSelect);
+                    containerSelect.appendChild(labelSelect);
+                    containerSelect.appendChild(tagSelect);
+                    divForm.appendChild(containerSelect)
 
                 break;
 
@@ -118,11 +121,13 @@ async function constructForm(divForm, language) {
                                 });
                                  
                                 fieldset.appendChild(legend);
+
                                 divForm.appendChild(fieldset);
 
                             break;
                     
                         default:
+                            const containerInput = document.createElement("div");
                             const tagInput = document.createElement(formElement.tag);
                              container.className = "inputLabel";
      
@@ -143,9 +148,11 @@ async function constructForm(divForm, language) {
                                 tagInput.setAttribute("id", formElement.id);
                             }
                             
-                            container.appendChild(label);
-                            container.appendChild(errorMessage);
-                            container.appendChild(tagInput);
+                            containerInput.appendChild(label);
+                            containerInput.appendChild(errorMessage);
+                            containerInput.appendChild(tagInput);
+                            
+                            divForm.appendChild(containerInput);
 
                         break;
                     }
@@ -153,7 +160,6 @@ async function constructForm(divForm, language) {
                 break;
             }
                     
-            divForm.appendChild(container);
             divForm.appendChild(btn);
 
         });
