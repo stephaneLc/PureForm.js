@@ -50,9 +50,6 @@ async function constructForm(divForm, language) {
                     btn.setAttribute("type",dataJson.button.type);
                     btn.textContent = dataJson.button.text[language];
 
-                    divForm.appendChild(btn);
-
-
 
         dataJson.fields.forEach(formElement => {
             
@@ -72,10 +69,8 @@ async function constructForm(divForm, language) {
 
 
             const tag = document.createElement(formElement.tag);
-                    /* tag.setAttribute("type", formElement.type); */
                     tag.setAttribute("name", formElement.name);
                     tag.setAttribute("id", formElement.id);
-                   /*  tag.setAttribute("value", "");    */
                                 
             switch (formElement.tag) {
                 case "select":
@@ -130,16 +125,19 @@ async function constructForm(divForm, language) {
                             tag.setAttribute("type", formElement.type);        
                             /* tag.setAttribute("id", formElement.id) */
                             tag.setAttribute("value", ""); 
+
+                            container.appendChild(label);
+                            container.appendChild(errorMessage);
+                            container.appendChild(tag);
                         break;
                     }
 
                 break;
             }
                     
-            container.appendChild(label);
-            container.appendChild(errorMessage);
             container.appendChild(tag);
             divForm.appendChild(container);
+            divForm.appendChild(btn);
         });
 
     } catch (error) {
