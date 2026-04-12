@@ -56,27 +56,48 @@ async function constructForm(divForm, language) {
 
         dataJson.fields.forEach(formElement => {
             
-            console.log('formElement', formElement);
-
             const container = document.createElement("div");
                             container.className = "inputLabel";
 
             const label = document.createElement("label");
+                        label.setAttribute("for", formElement.id);
                         label.innerHTML = formElement.label[language];
 
             const errorMessage = document.createElement("p");
                                 errorMessage.className = "error";
 
                                 if(formElement.validation.required.message?.[language]){
-                                        errorMessage.innerHTML = formElement.validation.required.message[language]
+                                    errorMessage.innerHTML = formElement.validation.required.message[language]
                                 }
+
 
             const tag = document.createElement(formElement.tag);
                     tag.setAttribute("type", formElement.type);
                     tag.setAttribute("name", formElement.name);
+                    tag.setAttribute("id", formElement.id);
                     tag.setAttribute("value", "");   
                                 
+            switch (formElement.tag) {
+                case "select":
 
+                    const option = document.createElement("option");
+
+                    formElement.options.forEach(option =>{
+                           tag.add(new Option(option.text[language],option.value))
+                    });
+
+                break;
+
+                case "textarea":
+                    console.log('texarea');
+                    tag.setAttribute("rows", 10);
+                    tag.setAttribute("cols",50);
+                break;
+
+                default:
+
+                break;
+            }
                     
             container.appendChild(label);
             container.appendChild(errorMessage);
