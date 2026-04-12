@@ -67,19 +67,19 @@ async function constructForm(divForm, language) {
                                     errorMessage.innerHTML = formElement.validation.required.message[language]
                                 }
 
-
-            const tag = document.createElement(formElement.tag);
-                    tag.setAttribute("name", formElement.name);
-                    tag.setAttribute("id", formElement.id);
-                                
             switch (formElement.tag) {
                 case "select":
-
+                    const tagSelect = document.createElement(formElement.tag);
+                                      tagSelect.setAttribute("name", formElement.name);
+                                      tagSelect.setAttribute("id", formElement.id);
+                                      
                     const option = document.createElement("option");
-
+                        
                     formElement.options.forEach(option =>{
-                           tag.add(new Option(option.text[language],option.value))
+                           tagSelect.add(new Option(option.text[language],option.value));
+                           
                     });
+                    container.appendChild(tagSelect);
 
                 break;
 
@@ -88,8 +88,10 @@ async function constructForm(divForm, language) {
                     switch (formElement.type) {
                         case 'radio':
                         case 'checkbox':
-                                const fieldset = document.createElement('fieldset');
-                                const legend = document.createElement('legend');
+
+                            const tagRadioCheckbox = document.createElement(formElement.tag);
+                            const fieldset = document.createElement('fieldset');
+                            const legend = document.createElement('legend');
 
                                 legend.innerHTML = formElement.label[language];
 
@@ -98,12 +100,12 @@ async function constructForm(divForm, language) {
                                     const radioCheckInput = document.createElement(formElement.tag); 
                                     const label = document.createElement("label");
                                    
-                                    label.innerHTML = option.text[language];
+                                                  label.innerHTML = option.text[language];
 
-                                    radioCheckInput.setAttribute("name", formElement.name);
-                                    radioCheckInput.setAttribute("id", formElement.id);
-                                    radioCheckInput.setAttribute("type",formElement.type);
-                                    radioCheckInput.setAttribute("value", option.value);
+                                                  radioCheckInput.setAttribute("name", formElement.name);
+                                                  radioCheckInput.setAttribute("id", formElement.id);
+                                                  radioCheckInput.setAttribute("type",formElement.type);
+                                                  radioCheckInput.setAttribute("value", option.value);
 
                                     label.appendChild(radioCheckInput);
                                     fieldset.appendChild(label);
@@ -116,27 +118,31 @@ async function constructForm(divForm, language) {
                             break;
                     
                         default:
-                            tag.setAttribute("type", formElement.type);        
-                            /* tag.setAttribute("id", formElement.id) */
-                            tag.setAttribute("value", ""); 
+                            const tagInput = document.createElement(formElement.tag);
+                                             tagInput.setAttribute("type", formElement.type);        
+                                             tagInput.setAttribute("value", ""); 
 
                             container.appendChild(label);
                             container.appendChild(errorMessage);
-                            container.appendChild(tag);
+                            container.appendChild(tagInput);
+
+                            if(formElement.tag == 'textarea'){
+                                tagInput.setAttribute("rows", 10);
+                                tagInput.setAttribute("cols",50);
+                            }
+
+                            tagInput.setAttribute("name", formElement.name);
+                            tagInput.setAttribute("id", formElement.id);
+
                         break;
                     }
 
                 break;
             }
                     
-            if(formElement.tag == 'textarea'){
-                tag.setAttribute("rows", 10);
-                tag.setAttribute("cols",50);
-            }
-
-            container.appendChild(tag);
             divForm.appendChild(container);
             divForm.appendChild(btn);
+
         });
 
     } catch (error) {
