@@ -41,24 +41,23 @@ async function constructForm(divForm, language) {
                     form.setAttribute("action", dataJson.form.action);
                     form.setAttribute("methode",dataJson.form.method);
                     form.setAttribute("id",dataJson.form.id);
+                    form.setAttribute("class",dataJson.form.class)
 
                     divForm.appendChild(form);
 
         const btn = document.createElement(dataJson.button.tag);
                     btn.setAttribute("type",dataJson.button.type);
                     btn.textContent = dataJson.button.text[language];
-
+                    btn.setAttribute("class", dataJson.button.class);
 
         dataJson.fields.forEach(formElement => {
-            
-            const container = document.createElement("div");
 
             const label = document.createElement("label");
                           label.setAttribute("for", formElement.id);
                           label.innerHTML = formElement.label[language];
 
             const errorMessage = document.createElement("p");
-                                errorMessage.className = "error";
+                                errorMessage.className = "message error";
 
                                 if(formElement.validation.required.message?.[language]){
                                     errorMessage.innerHTML = formElement.validation.required.message[language]
@@ -70,7 +69,10 @@ async function constructForm(divForm, language) {
     
                     const tagSelect = document.createElement(formElement.tag);
                                       tagSelect.setAttribute("name", formElement.name);
-                                      tagSelect.setAttribute("id", formElement.id);
+
+                                      if(formElement.id !==''){
+                                        tagSelect.setAttribute("id", formElement.id);
+                                      }
 
                     const labelSelect = document.createElement("label");
                                 labelSelect.setAttribute("for", formElement.id);
@@ -83,7 +85,8 @@ async function constructForm(divForm, language) {
 
                     containerSelect.appendChild(labelSelect);
                     containerSelect.appendChild(tagSelect);
-                    divForm.appendChild(containerSelect)
+
+                    form.appendChild(containerSelect);
 
                 break;
 
@@ -113,21 +116,21 @@ async function constructForm(divForm, language) {
                                                     radioCheckInput.setAttribute("id", formElement.id);
                                                 }
 
-                                    label.appendChild(radioCheckInput);
+                                    label.prepend(radioCheckInput);
                                     fieldset.appendChild(label);
 
                                 });
                                  
                                 fieldset.appendChild(legend);
 
-                                divForm.appendChild(fieldset);
+                                form.appendChild(fieldset);
 
                             break;
                     
                         default:
                             const containerInput = document.createElement("div");
                             const tagInput = document.createElement(formElement.tag);
-                             container.className = "inputLabel";
+                            containerInput.className = "form__field";
      
                             if(formElement.tag !== 'textarea'){
                                 tagInput.setAttribute("value", ""); 
@@ -146,22 +149,22 @@ async function constructForm(divForm, language) {
                                 tagInput.setAttribute("id", formElement.id);
                             }
                             
-                            containerInput.appendChild(label);
                             containerInput.appendChild(errorMessage);
                             containerInput.appendChild(tagInput);
+                            containerInput.appendChild(label);
                             
-                            divForm.appendChild(containerInput);
+                            form.appendChild(containerInput);
 
                         break;
                     }
 
                 break;
             }
-                    
-            divForm.appendChild(btn);
-
+                
         });
 
+        form.appendChild(btn);
+        
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
     }
@@ -169,7 +172,7 @@ async function constructForm(divForm, language) {
 
 
 function floatingLabelsOnInput(){
-  
+
     document.querySelectorAll("input").forEach( input => {
 
         if(input.type !== "radio" && input.type !=="checkbox"){
