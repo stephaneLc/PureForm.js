@@ -6,7 +6,7 @@
     "form" : {
             "tag" : "form",
             "id" : "form",
-            "class" : "",
+            "class" : "form",
             "action": "",
             "method" : "GET"
         },
@@ -14,7 +14,7 @@
         {
             "tag" : "input",
             "class" : "",
-            "id" : "",
+            "id" : "firstName",
             "type" : "text",
             "label" : {
                 "fr" : "Prénom",
@@ -34,7 +34,7 @@
         {
             "tag" : "input",
             "class" : "",
-            "id" : "",
+            "id" : "name",
             "type" : "text",
             "label" : {
                 "fr" : "Nom",
@@ -51,7 +51,7 @@
         {
             "tag" : "input",
             "class" : "",
-            "id" : "",
+            "id" : "email",
             "type" : "email",
             "label" : {
                 "fr" : "Courriel",
@@ -78,7 +78,7 @@
         {
             "tag" : "input",
             "class" : "",
-            "id" : "",
+            "id" : "phoneNumber",
             "type" : "tel",
             "label" : {
                 "fr" : "Téléphone",
@@ -283,7 +283,7 @@
     "button" : {
             "tag" : "button",
             "id" : "",
-            "class" : "btn-primary",
+            "class" : "btn__primary",
             "type" : "submit",
             "text" : {
                 "fr" : "Envoyer",
