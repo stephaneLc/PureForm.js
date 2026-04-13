@@ -48,7 +48,19 @@
 
     }
 
-    input,select{
+    &__textarea{
+        
+        label{
+            display: block;
+            margin-bottom: 15px;
+
+        }
+
+    }
+
+    input,
+    select,
+    textarea{
         background-color: var(--input-select-bck-color);
         width: 100%;
         border-radius: 4px;
