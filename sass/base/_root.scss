@@ -33,13 +33,16 @@
     --btn-second-text-color-hover: var(--color-white);
     --btn-second-text-color: var(--color-secondary);
 
-    --input-select-bck-color: var(--color-white);
-    --input-select-border-size: 1px;
-    --input-select-border-color: var(--color-secondary);
+    --field-base-bck-color: var(--color-white);
+    --field-base-border-size: 1px;
+    --field-base-border-color: var(--color-secondary);
 
-    --input-select-focus-visible-size: 1px;
-    --input-select-focus-visible-color: var(--color-primary);
-    --input-select-active-color: var(--color-primary);
+    --field-base-focus-visible-size: 1px;
+    --field-base-focus-visible-color: var(--color-primary);
+    --field-base-active-color: var(--color-primary);
+
+    --field-base-border-size-focus: 1px;
+    --field-base-border-color-focus: var(--color-primary);
 
     --select-border-size-focus: 2px;
     --select-border-color-focus: var(--color-primary);
