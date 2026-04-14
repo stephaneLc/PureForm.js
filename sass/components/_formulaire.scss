@@ -39,7 +39,7 @@
             }
 
             &:has(+ label.active){
-                border-color: var(--input-select-active-color);
+                border-color: var(--field-base-active-color);
 
             }
             
@@ -61,19 +61,19 @@
     input,
     select,
     textarea{
-        background-color: var(--input-select-bck-color);
+        background-color: var(--field-base-bck-color);
         width: 100%;
         border-radius: 4px;
-        border: var(--input-select-border-size) solid var(--input-select-border-color);
+        border: var(--field-base-border-size) solid var(--field-base-border-color);
         padding: 8px;
 
         &:focus {
-            border: var(--select-border-size) solid var(--select-border-color);
+            border: var(--field-base-border-size-focus) solid var(--field-base-border-color-focus);
             outline: none;
         }
 
         &:focus-visible{
-            outline: var(--input-select-focus-visible-size) solid var(--input-select-focus-visible-color);
+            outline: var(--field-base-focus-visible-size) solid var(--field-base-focus-visible-color);
         }
 
     }
@@ -168,7 +168,7 @@
     select{
         
         &:focus {
-            border: var(--select-border-size) solid var(--select-border-color);
+            border: var(--select-border-size-focus) solid var(--select-border-color-focus);
             outline: none;
         }
 
