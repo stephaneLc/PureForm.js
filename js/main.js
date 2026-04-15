@@ -100,7 +100,8 @@ async function constructForm(divForm, language) {
                             const legend = document.createElement('legend');
 
                                 legend.innerHTML = formElement.label[language];
-
+                                fieldset.appendChild(legend);
+                                
                                 formElement.options.forEach(option => {
                                     
                                     const radioCheckInput = document.createElement(formElement.tag); 
@@ -121,8 +122,6 @@ async function constructForm(divForm, language) {
 
                                 });
                                  
-                                fieldset.appendChild(legend);
-
                                 form.appendChild(fieldset);
 
                             break;
