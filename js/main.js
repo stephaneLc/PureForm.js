@@ -83,6 +83,7 @@ async function constructForm(divForm, language) {
                            
                     });
 
+                    containerSelect.className = "form__select";
                     containerSelect.appendChild(labelSelect);
                     containerSelect.appendChild(tagSelect);
 
@@ -101,7 +102,7 @@ async function constructForm(divForm, language) {
 
                                 legend.innerHTML = formElement.label[language];
                                 fieldset.appendChild(legend);
-                                
+
                                 formElement.options.forEach(option => {
                                     
                                     const radioCheckInput = document.createElement(formElement.tag); 
@@ -137,6 +138,7 @@ async function constructForm(divForm, language) {
                             if(formElement.tag == 'textarea'){
                                 tagInput.setAttribute("rows", 10);
                                 tagInput.setAttribute("cols",50);
+                                containerInput.className = "form__textarea";
                                 containerInput.appendChild(label);
                                 containerInput.appendChild(errorMessage);
                                 containerInput.appendChild(tagInput);
