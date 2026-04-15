@@ -184,18 +184,18 @@
         margin: 0;
         padding: 0;
         border: none;
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+        justify-items: start;
         gap: 10px;
 
         legend {
-            width: 100%;
+            grid-column: 1 / -1;
             padding: 0;
             margin-bottom: 15px;
         }
 
         label{
-            width: fit-content;
             display: flex; 
             align-items: center;
             gap: 10px;            
