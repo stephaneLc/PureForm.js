@@ -130,28 +130,27 @@ async function constructForm(divForm, language) {
                         default:
                             const containerInput = document.createElement("div");
                             const tagInput = document.createElement(formElement.tag);
-                            containerInput.className = "form__field";
-     
-                            if(formElement.tag !== 'textarea'){
-                                tagInput.setAttribute("value", ""); 
+                            
+                            if(formElement.id !==''){
+                                tagInput.setAttribute("id", formElement.id);
                             }
 
                             if(formElement.tag == 'textarea'){
                                 tagInput.setAttribute("rows", 10);
                                 tagInput.setAttribute("cols",50);
-                            }
-
-                            if(formElement.type !==''){
+                                containerInput.appendChild(label);
+                                containerInput.appendChild(errorMessage);
+                                containerInput.appendChild(tagInput);
+                                
+                            }else{
+                                containerInput.className = "form__field";
                                 tagInput.setAttribute("type", formElement.type);
+                                tagInput.setAttribute("value", ""); 
+                                
+                                containerInput.appendChild(errorMessage);
+                                containerInput.appendChild(tagInput);
+                                containerInput.appendChild(label);
                             }
-
-                            if(formElement.id !==''){
-                                tagInput.setAttribute("id", formElement.id);
-                            }
-                            
-                            containerInput.appendChild(errorMessage);
-                            containerInput.appendChild(tagInput);
-                            containerInput.appendChild(label);
                             
                             form.appendChild(containerInput);
 
