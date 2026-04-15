@@ -11,7 +11,7 @@
     align-items: start;
     gap: 25px;
 
-    @include BP(mobile){
+    @include BP(tablet){
         grid-template-columns: 1fr 1fr;
     }
 
@@ -206,11 +206,13 @@
     .btn{
         
         &__primary{
+            display: block;
+            max-width: 350px;
+            width: 100%;
+            margin: 0 auto;
 
-            @include BP(mobile){
+            @include BP(tablet){
                 grid-column: span 2;
-                max-width: 350px;
-                margin: 0 auto;
             }
 
         }
