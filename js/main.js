@@ -128,6 +128,7 @@ async function constructForm(divForm, language) {
                             const containerInput = document.createElement("div");
                             const tagInput = document.createElement(formElement.tag);
                              container.className = "inputLabel";
+                             tagInput.setAttribute("name", formElement.name);
      
                             if(formElement.tag !== 'textarea'){
                                 tagInput.setAttribute("value", ""); 
@@ -161,6 +162,8 @@ async function constructForm(divForm, language) {
             divForm.appendChild(btn);
 
         });
+
+        checkFields(form,dataJson.fields);
 
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
@@ -229,3 +232,52 @@ function optionSelected(){
 
 floatingLabelsOnInput();
 optionSelected();
+
+
+async function checkFields(form, jsonData) {
+    const btnSubmit = document.querySelector("button");
+    const inputs = document.querySelectorAll("input");
+
+    //console.log('btnSubmit', btnSubmit);
+   /*  console.log('inputs', inputs); */
+
+    btnSubmit.addEventListener('click', function(event){
+        event.preventDefault;
+
+        sendForm();
+    });
+
+}
+
+async function sendForm(params,inputs) {
+    
+    try {
+        //console.log('envoyer catch');
+        //console.log('params', params);
+        //console.log('inputs', inputs);
+        const params = [['cle1', 'valeur1'],['cle2', 'valeur2'],['cle3', 'valeur3']]
+        const objetParams = Object.fromEntries(params);
+
+        const response = await fetch("php/form-handler.php",{
+            method: 'POST',
+            headers: {
+                 "Content-Type": "application/json"
+            },
+            body: JSON.stringify(objetParams)
+        });
+
+        if(!response.ok){
+            throw new Error(`Statut de réponse: ${response.status}`);
+        }
+
+        const result = await response.text();
+        console.log('resulttest', result);
+
+        
+
+    } catch (error) {
+         divForm.innerText = "Une erreur est survenu" + ' ' + error;
+    }
+}
+
+/* Note: correction des erreurs est dans le stash.  */
