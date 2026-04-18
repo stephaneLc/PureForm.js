@@ -244,7 +244,32 @@ async function checkFields(form, jsonData) {
     btnSubmit.addEventListener('click', function(event){
         event.preventDefault;
 
-        sendForm();
+        let formValide = true; 
+
+        inputs.forEach(input => {
+   
+            const compareInputToDataJson = jsonData.find(jsonData => jsonData.name ===input.name);
+
+            const infoInputError = document.querySelector(`[name="${input.name}"]`);
+
+
+            if(compareInputToDataJson && compareInputToDataJson.validation.required && input.value ==''){
+                infoInputError.previousElementSibling.style.display = "block";
+                formValide =  false;
+                   
+            }else if(infoInputError.previousElementSibling !== null){
+                infoInputError.previousElementSibling.style.display = "none";
+
+            } 
+
+        });
+
+        if(formValide){
+            const formData = new FormData(form);
+            //console.log('formData', formData);
+            sendForm(formData,inputs);
+        }
+
     });
 
 }
@@ -255,7 +280,7 @@ async function sendForm(params,inputs) {
         //console.log('envoyer catch');
         //console.log('params', params);
         //console.log('inputs', inputs);
-        const params = [['cle1', 'valeur1'],['cle2', 'valeur2'],['cle3', 'valeur3']]
+
         const objetParams = Object.fromEntries(params);
 
         const response = await fetch("php/form-handler.php",{
