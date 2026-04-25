@@ -270,10 +270,9 @@ async function checkFields(form, jsonData) {
                     errorRadio.style.display = 'block';
                 }
                 
-            }else if(compareInputToDataJson.type == "checkbox"){
-                console.log('compareInputToDataJson', compareInputToDataJson.validation.required.minChecked);   
-                const groupeCheckbox = document.querySelectorAll(`[name="${input.name}"]`);
-                    const isCheckboxChecked = Array.from(groupeCheckbox).filter(check => check.checked).length >=2;
+            }else if(compareInputToDataJson.type == "checkbox"){  
+                    const groupeCheckbox = document.querySelectorAll(`[name="${input.name}"]`);
+                    const isCheckboxChecked = Array.from(groupeCheckbox).filter(check => check.checked).length >= compareInputToDataJson.validation.required.minChecked;
                     const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
 
                     if(isCheckboxChecked){
