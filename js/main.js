@@ -222,20 +222,16 @@ function optionSelected(){
     document.querySelectorAll("select").forEach(select => {
 
         if(select.value !== ''){
-            console.log('a un option');
             select.classList.add("active");
         }else{
-            console.log('pas select');
             select.classList.remove("active");
         }
 
         select.addEventListener("change", () =>{
 
             if(select.value !== ''){
-                console.log('a un option');
                 select.classList.add("active");
             }else{
-                console.log('pas select');
                 select.classList.remove("active");
             }
 
@@ -262,7 +258,7 @@ async function checkFields(form, jsonData) {
    
             const compareInputToDataJson = jsonData.find(jsonData => jsonData.name ===input.name);
 
-            const infoInputError = document.querySelector(`[name="${input.name}"]`);
+            const infofieldName = document.querySelector(`[name="${input.name}"]`);
 
             if(compareInputToDataJson.type == "radio"){
 
@@ -273,7 +269,6 @@ async function checkFields(form, jsonData) {
                 if(isRadioChecked){
                     errorRadio.style.display = 'none';
                 }else{
-                    console.log('vide');
                     errorRadio.style.display = 'block';
                 }
                 
@@ -285,18 +280,17 @@ async function checkFields(form, jsonData) {
                     if(isCheckboxChecked){
                         errorCheckbox.style.display = 'none';
                     }else{
-                        console.log('vide');
                         errorCheckbox.style.display = 'block';
                     }
                     
             }
 
-            if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infoInputError.value == '')){
-                infoInputError.previousElementSibling.style.display = "block";
+            if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infofieldName.value == '')){
+                infofieldName.previousElementSibling.style.display = "block";
                 formValide =  false;
                    
-            }else if(infoInputError.previousElementSibling !== null){
-                infoInputError.previousElementSibling.style.display = "none";
+            }else if(infofieldName.previousElementSibling !== null){
+                infofieldName.previousElementSibling.style.display = "none";
 
             } 
 
