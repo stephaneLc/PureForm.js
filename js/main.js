@@ -270,6 +270,7 @@ async function checkFields(form, jsonData) {
                     errorRadio.style.display = 'none';
                 }else{
                     errorRadio.style.display = 'block';
+                    formValide =  false;
                 }
                 
             }else if(compareInputToDataJson.type == "checkbox"){  
@@ -281,6 +282,7 @@ async function checkFields(form, jsonData) {
                         errorCheckbox.style.display = 'none';
                     }else{
                         errorCheckbox.style.display = 'block';
+                        formValide =  false;
                     }
                     
             }
@@ -353,7 +355,9 @@ async function sendForm(params,inputs) {
             document.getElementById("succes").appendChild(ligneResultat);
         }
 
-        
+        inputs.forEach(input =>{
+            input.value = "";
+        });
 
     } catch (error) {
          divForm.innerText = "Une erreur est survenu" + ' ' + error;
