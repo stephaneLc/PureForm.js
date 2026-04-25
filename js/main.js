@@ -98,6 +98,13 @@ async function constructForm(divForm, language) {
 
                                 legend.innerHTML = formElement.label[language];
 
+                                const errorMessageCase = document.createElement("p");
+                                    errorMessageCase.className = "error";
+
+                                    if(formElement.validation.required.message?.[language]){
+                                        errorMessageCase.innerHTML = formElement.validation.required.message[language]
+                                    }
+
                                 formElement.options.forEach(option => {
                                     
                                     const radioCheckInput = document.createElement(formElement.tag); 
@@ -119,7 +126,7 @@ async function constructForm(divForm, language) {
                                 });
                                  
                                 fieldset.appendChild(legend);
-
+                                fieldset.appendChild(errorMessage);
                                 divForm.appendChild(fieldset);
 
                             break;
@@ -238,11 +245,8 @@ async function checkFields(form, jsonData) {
     const btnSubmit = document.querySelector("button");
     const inputs = document.querySelectorAll("input");
 
-    //console.log('btnSubmit', btnSubmit);
-   /*  console.log('inputs', inputs); */
-
     btnSubmit.addEventListener('click', function(event){
-        event.preventDefault;
+        event.preventDefault();
 
         let formValide = true; 
 
@@ -252,6 +256,34 @@ async function checkFields(form, jsonData) {
 
             const infoInputError = document.querySelector(`[name="${input.name}"]`);
 
+
+            if(compareInputToDataJson.type == "radio"){
+
+                const groupeRadio = document.querySelectorAll(`[name="${input.name}"]`);
+                const isRadioChecked = Array.from(groupeRadio).some(radio => radio.checked);
+                const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+                
+                if(isRadioChecked){
+                    errorRadio.style.display = 'none';
+                }else{
+                    console.log('vide');
+                    errorRadio.style.display = 'block';
+                }
+                
+            }else if(compareInputToDataJson.type == "checkbox"){
+                console.log('compareInputToDataJson', compareInputToDataJson.validation.required.minChecked);   
+                const groupeCheckbox = document.querySelectorAll(`[name="${input.name}"]`);
+                    const isCheckboxChecked = Array.from(groupeCheckbox).filter(check => check.checked).length >=2;
+                    const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+
+                    if(isCheckboxChecked){
+                        errorCheckbox.style.display = 'none';
+                    }else{
+                        console.log('vide');
+                        errorCheckbox.style.display = 'block';
+                    }
+                    
+            }
 
             if(compareInputToDataJson && compareInputToDataJson.validation.required && input.value ==''){
                 infoInputError.previousElementSibling.style.display = "block";
