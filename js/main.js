@@ -309,11 +309,18 @@ async function checkFields(form, jsonData) {
 async function sendForm(params,inputs) {
     
     try {
-        //console.log('envoyer catch');
-        //console.log('params', params);
-        //console.log('inputs', inputs);
 
-        const objetParams = Object.fromEntries(params);
+        const objetParams ={};
+        for(const [key,value] of params){
+
+            if(objetParams[key]){
+                objetParams[key] = [].concat(objetParams[key],value);
+
+            }else{
+                objetParams[key] = value;
+                
+            }
+        }
 
         const response = await fetch("php/form-handler.php",{
             method: 'POST',
