@@ -327,8 +327,24 @@ async function sendForm(params,inputs) {
             throw new Error(`Statut de réponse: ${response.status}`);
         }
 
-        const result = await response.text();
-        console.log('resulttest', result);
+        const resultat = await response.json();
+
+        const messageSucces = document.createElement("p");
+        messageSucces.className = "succes";
+        messageSucces.id = "succes"
+        messageSucces.innerHTML =  "Le formulaire a été envoyé avec succès avec les infos suivante: ";
+
+     
+        document.getElementById("divForm").prepend(messageSucces);
+
+        for (const clef in resultat.donnees){
+
+            const ligneResultat = document.createElement("p");
+            ligneResultat.className = "resultat";
+            ligneResultat.textContent = `${clef}: ${resultat.donnees[clef]}`;
+
+            document.getElementById("succes").appendChild(ligneResultat);
+        }
 
         
 
