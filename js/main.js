@@ -91,7 +91,7 @@ async function constructForm(divForm, language) {
                     containerSelect.appendChild(labelSelect);
                     containerSelect.appendChild(errorMessageSelect);
                     containerSelect.appendChild(tagSelect);
-                    divForm.appendChild(containerSelect)
+                    form.appendChild(containerSelect)
 
                 break;
 
@@ -135,7 +135,7 @@ async function constructForm(divForm, language) {
                                  
                                 fieldset.appendChild(legend);
                                 fieldset.appendChild(errorMessage);
-                                divForm.appendChild(fieldset);
+                                form.appendChild(fieldset);
 
                             break;
                     
@@ -166,7 +166,7 @@ async function constructForm(divForm, language) {
                             containerInput.appendChild(errorMessage);
                             containerInput.appendChild(tagInput);
                             
-                            divForm.appendChild(containerInput);
+                            form.appendChild(containerInput);
 
                         break;
                     }
@@ -174,7 +174,7 @@ async function constructForm(divForm, language) {
                 break;
             }
                     
-            divForm.appendChild(btn);
+            form.appendChild(btn);
 
         });
 
@@ -336,5 +336,3 @@ async function sendForm(params,inputs) {
          divForm.innerText = "Une erreur est survenu" + ' ' + error;
     }
 }
-
-/* Note: correction des erreurs est dans le stash.  */
