@@ -76,12 +76,20 @@ async function constructForm(divForm, language) {
                                 labelSelect.setAttribute("for", formElement.id);
                                 labelSelect.innerHTML = formElement.label[language];
                                 
+                    const errorMessageSelect = document.createElement("p");
+                                errorMessageSelect.className = "error";
+
+                                if(formElement.validation.message?.[language]){
+                                    errorMessageSelect.innerHTML = formElement.validation.required.message[language]
+                                }
+
                     formElement.options.forEach(option =>{
                            tagSelect.add(new Option(option.text[language],option.value));
                            
                     });
 
                     containerSelect.appendChild(labelSelect);
+                    containerSelect.appendChild(errorMessageSelect);
                     containerSelect.appendChild(tagSelect);
                     divForm.appendChild(containerSelect)
 
@@ -243,8 +251,8 @@ optionSelected();
 
 async function checkFields(form, jsonData) {
     const btnSubmit = document.querySelector("button");
-    const inputs = document.querySelectorAll("input");
-
+    const inputs = document.querySelectorAll("input,select,textarea");
+  
     btnSubmit.addEventListener('click', function(event){
         event.preventDefault();
 
@@ -255,7 +263,6 @@ async function checkFields(form, jsonData) {
             const compareInputToDataJson = jsonData.find(jsonData => jsonData.name ===input.name);
 
             const infoInputError = document.querySelector(`[name="${input.name}"]`);
-
 
             if(compareInputToDataJson.type == "radio"){
 
@@ -284,7 +291,7 @@ async function checkFields(form, jsonData) {
                     
             }
 
-            if(compareInputToDataJson && compareInputToDataJson.validation.required && input.value ==''){
+            if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infoInputError.value == '')){
                 infoInputError.previousElementSibling.style.display = "block";
                 formValide =  false;
                    
