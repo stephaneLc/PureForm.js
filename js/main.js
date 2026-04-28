@@ -178,7 +178,7 @@ async function constructForm(divForm, language) {
 
         });
 
-        checkFields(form,dataJson.fields);
+        checkFields(form,dataJson.fields,language);
 
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
@@ -245,7 +245,7 @@ floatingLabelsOnInput();
 optionSelected();
 
 
-async function checkFields(form, jsonData) {
+async function checkFields(form, jsonData, language) {
     const btnSubmit = document.querySelector("button");
     const inputs = document.querySelectorAll("input,select,textarea");
   
@@ -260,20 +260,20 @@ async function checkFields(form, jsonData) {
 
             const infofieldName = document.querySelector(`[name="${input.name}"]`);
 
-            if(compareInputToDataJson.type == "radio"){
-
-                const groupeRadio = document.querySelectorAll(`[name="${input.name}"]`);
-                const isRadioChecked = Array.from(groupeRadio).some(radio => radio.checked);
-                const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
-                
-                if(isRadioChecked){
-                    errorRadio.style.display = 'none';
-                }else{
-                    errorRadio.style.display = 'block';
-                    formValide =  false;
-                }
-                
-            }else if(compareInputToDataJson.type == "checkbox"){  
+            switch (compareInputToDataJson.type) {
+                case "radio":
+                        const groupeRadio = document.querySelectorAll(`[name="${input.name}"]`);
+                        const isRadioChecked = Array.from(groupeRadio).some(radio => radio.checked);
+                        const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+                        
+                        if(isRadioChecked){
+                            errorRadio.style.display = 'none';
+                        }else{
+                            errorRadio.style.display = 'block';
+                            formValide =  false;
+                        }
+                    break;
+                case "checkbox": 
                     const groupeCheckbox = document.querySelectorAll(`[name="${input.name}"]`);
                     const isCheckboxChecked = Array.from(groupeCheckbox).filter(check => check.checked).length >= compareInputToDataJson.validation.required.minChecked;
                     const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
@@ -284,14 +284,33 @@ async function checkFields(form, jsonData) {
                         errorCheckbox.style.display = 'block';
                         formValide =  false;
                     }
+                    break;
+                case "tel" : 
+                case "email": 
+
+                    if(compareInputToDataJson.validation.format && input.value !==''){
+                        const phoneRegex =  new RegExp(compareInputToDataJson.validation.format.pattern);
+
+                        if(!phoneRegex.test(input.value)){
+                            infofieldName.previousElementSibling.innerHTML = compareInputToDataJson.validation.format.message[language];
+                            infofieldName.previousElementSibling.style.display = "block";
+                            formValide =  false;                            
+                        }else{
+                            infofieldName.previousElementSibling.style.display = "none";
+                        }
+
+                    }
+
+                    break;
                     
+
             }
 
             if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infofieldName.value == '')){
                 infofieldName.previousElementSibling.style.display = "block";
                 formValide =  false;
                    
-            }else if(infofieldName.previousElementSibling !== null){
+            }else if(infofieldName.previousElementSibling !== null && formValide){
                 infofieldName.previousElementSibling.style.display = "none";
 
             } 
