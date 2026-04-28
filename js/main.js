@@ -367,7 +367,12 @@ async function sendForm(params,inputs) {
         messageSucces.id = "succes"
         messageSucces.innerHTML =  "Le formulaire a été envoyé avec succès avec les infos suivante: ";
 
-     
+        //Delete the previous message
+        const isSuccessExists = document.getElementById("succes");
+        if(isSuccessExists){
+            isSuccessExists.remove();
+        }
+
         document.getElementById("divForm").prepend(messageSucces);
 
         for (const clef in resultat.donnees){
