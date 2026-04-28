@@ -376,6 +376,7 @@ async function sendForm(params,inputs) {
 
         inputs.forEach(input =>{
             input.value = "";
+            input.checked = false;
         });
 
     } catch (error) {
