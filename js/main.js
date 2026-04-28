@@ -288,7 +288,10 @@ async function checkFields(form, jsonData, language) {
                 case "tel" : 
                 case "email": 
 
-                    if(compareInputToDataJson.validation.format && input.value !==''){
+                    if(compareInputToDataJson.validation.required.value && input.value ===''){
+                            infofieldName.previousElementSibling.style.display = "block";
+                            formValide =  false;
+                    }else if(compareInputToDataJson.validation.format && input.value !==''){
                         const phoneRegex =  new RegExp(compareInputToDataJson.validation.format.pattern);
 
                         if(!phoneRegex.test(input.value)){
@@ -302,24 +305,26 @@ async function checkFields(form, jsonData, language) {
                     }
 
                     break;
-                    
+
+                default: 
+
+                    if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infofieldName.value == '')){
+                        infofieldName.previousElementSibling.style.display = "block";
+                        formValide =  false;
+                        
+                    }else if(infofieldName.previousElementSibling !== null && formValide){
+                        infofieldName.previousElementSibling.style.display = "none";
+
+                    } 
 
             }
 
-            if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infofieldName.value == '')){
-                infofieldName.previousElementSibling.style.display = "block";
-                formValide =  false;
-                   
-            }else if(infofieldName.previousElementSibling !== null && formValide){
-                infofieldName.previousElementSibling.style.display = "none";
 
-            } 
 
         });
 
         if(formValide){
             const formData = new FormData(form);
-            //console.log('formData', formData);
             sendForm(formData,inputs);
         }
 
