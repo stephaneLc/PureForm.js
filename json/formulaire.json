@@ -6,7 +6,7 @@
     "form" : {
             "tag" : "form",
             "id" : "form",
-            "class" : "",
+            "class" : "form",
             "action": "",
             "method" : "GET"
         },
@@ -291,7 +291,7 @@
     "button" : {
             "tag" : "button",
             "id" : "",
-            "class" : "btn-primary",
+            "class" : "btn__primary",
             "type" : "submit",
             "text" : {
                 "fr" : "Envoyer",

@@ -11,7 +11,7 @@
     align-items: start;
     gap: 25px;
 
-    @include BP(mobile){
+    @include BP(tablet){
         grid-template-columns: 1fr 1fr;
     }
 
@@ -48,7 +48,8 @@
 
     }
 
-    &__textarea{
+    &__textarea,
+    &__select{
         
         label{
             display: block;
@@ -183,21 +184,37 @@
         margin: 0;
         padding: 0;
         border: none;
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+        justify-items: start;
         gap: 10px;
 
         legend {
-            width: 100%;
+            grid-column: 1 / -1;
             padding: 0;
             margin-bottom: 15px;
         }
 
         label{
-            width: fit-content;
             display: flex; 
             align-items: center;
             gap: 10px;            
+        }
+
+    }
+
+    .btn{
+        
+        &__primary{
+            display: block;
+            max-width: 350px;
+            width: 100%;
+            margin: 0 auto;
+
+            @include BP(tablet){
+                grid-column: span 2;
+            }
+
         }
 
     }
@@ -221,7 +238,7 @@
         color: #ff2d00 ;
         background-color: rgba(255, 45, 0, 0.05);
         border-color:#ff2d00;
-
+        display: none;
     }
 
 }

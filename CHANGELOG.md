@@ -5,6 +5,8 @@
 
 ### Ajouté
 
+- Mise en page de la page
+- Mise en page du formulaire avec les composantes
 - Affichage des messsages d'erreur dynamiques
 - Validation des champs côté client
 - Envoi formulaire via Fetch API avec traitement PHP
@@ -18,6 +20,8 @@
 
 ### Corrigé
 
+- Ajustement du responsive pour le checkbox
+- Modifier l'emplacement de la balise legend
 - Ajout du textarea manquant dans l'intégration du formulaire
 
 ### Modifié
