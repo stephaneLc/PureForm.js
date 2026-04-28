@@ -78,6 +78,13 @@ async function constructForm(divForm, language) {
                                 labelSelect.setAttribute("for", formElement.id);
                                 labelSelect.innerHTML = formElement.label[language];
                                 
+                    const errorMessageSelect = document.createElement("p");
+                                errorMessageSelect.className = "error";
+
+                                if(formElement.validation.message?.[language]){
+                                    errorMessageSelect.innerHTML = formElement.validation.required.message[language]
+                                }
+
                     formElement.options.forEach(option =>{
                            tagSelect.add(new Option(option.text[language],option.value));
                            
@@ -85,6 +92,7 @@ async function constructForm(divForm, language) {
 
                     containerSelect.className = "form__select";
                     containerSelect.appendChild(labelSelect);
+                    containerSelect.appendChild(errorMessageSelect);
                     containerSelect.appendChild(tagSelect);
 
                     form.appendChild(containerSelect);
@@ -102,6 +110,13 @@ async function constructForm(divForm, language) {
 
                                 legend.innerHTML = formElement.label[language];
                                 fieldset.appendChild(legend);
+
+                                const errorMessageCase = document.createElement("p");
+                                    errorMessageCase.className = "error";
+
+                                    if(formElement.validation.required.message?.[language]){
+                                        errorMessageCase.innerHTML = formElement.validation.required.message[language]
+                                    }
 
                                 formElement.options.forEach(option => {
                                     
@@ -123,6 +138,8 @@ async function constructForm(divForm, language) {
 
                                 });
                                  
+                                fieldset.appendChild(legend);
+                                fieldset.appendChild(errorMessage);
                                 form.appendChild(fieldset);
 
                             break;
@@ -133,6 +150,8 @@ async function constructForm(divForm, language) {
                             
                             if(formElement.id !==''){
                                 tagInput.setAttribute("id", formElement.id);
+                                containerInput.className = "inputLabel";
+                                tagInput.setAttribute("name", formElement.name);
                             }
 
                             if(formElement.tag == 'textarea'){
@@ -153,6 +172,10 @@ async function constructForm(divForm, language) {
                                 containerInput.appendChild(label);
                             }
                             
+                            containerInput.appendChild(label);
+                            containerInput.appendChild(errorMessage);
+                            containerInput.appendChild(tagInput);
+                            
                             form.appendChild(containerInput);
 
                         break;
@@ -160,11 +183,13 @@ async function constructForm(divForm, language) {
 
                 break;
             }
-                
+                    
+            form.appendChild(btn);
+
         });
 
-        form.appendChild(btn);
-        
+        checkFields(form,dataJson.fields,language);
+
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
     }
@@ -207,20 +232,16 @@ function optionSelected(){
     document.querySelectorAll("select").forEach(select => {
 
         if(select.value !== ''){
-            console.log('a un option');
             select.classList.add("active");
         }else{
-            console.log('pas select');
             select.classList.remove("active");
         }
 
         select.addEventListener("change", () =>{
 
             if(select.value !== ''){
-                console.log('a un option');
                 select.classList.add("active");
             }else{
-                console.log('pas select');
                 select.classList.remove("active");
             }
 
@@ -232,3 +253,153 @@ function optionSelected(){
 
 floatingLabelsOnInput();
 optionSelected();
+
+
+async function checkFields(form, jsonData, language) {
+    const btnSubmit = document.querySelector("button");
+    const inputs = document.querySelectorAll("input,select,textarea");
+  
+    btnSubmit.addEventListener('click', function(event){
+        event.preventDefault();
+
+        let formValide = true; 
+
+        inputs.forEach(input => {
+   
+            const compareInputToDataJson = jsonData.find(jsonData => jsonData.name ===input.name);
+
+            const infofieldName = document.querySelector(`[name="${input.name}"]`);
+
+            switch (compareInputToDataJson.type) {
+                case "radio":
+                        const groupeRadio = document.querySelectorAll(`[name="${input.name}"]`);
+                        const isRadioChecked = Array.from(groupeRadio).some(radio => radio.checked);
+                        const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+                        
+                        if(isRadioChecked){
+                            errorRadio.style.display = 'none';
+                        }else{
+                            errorRadio.style.display = 'block';
+                            formValide =  false;
+                        }
+                    break;
+                case "checkbox": 
+                    const groupeCheckbox = document.querySelectorAll(`[name="${input.name}"]`);
+                    const isCheckboxChecked = Array.from(groupeCheckbox).filter(check => check.checked).length >= compareInputToDataJson.validation.required.minChecked;
+                    const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+
+                    if(isCheckboxChecked){
+                        errorCheckbox.style.display = 'none';
+                    }else{
+                        errorCheckbox.style.display = 'block';
+                        formValide =  false;
+                    }
+                    break;
+                case "tel" : 
+                case "email": 
+
+                    if(compareInputToDataJson.validation.required.value && input.value ===''){
+                            infofieldName.previousElementSibling.style.display = "block";
+                            formValide =  false;
+                    }else if(compareInputToDataJson.validation.format && input.value !==''){
+                        const phoneRegex =  new RegExp(compareInputToDataJson.validation.format.pattern);
+
+                        if(!phoneRegex.test(input.value)){
+                            infofieldName.previousElementSibling.innerHTML = compareInputToDataJson.validation.format.message[language];
+                            infofieldName.previousElementSibling.style.display = "block";
+                            formValide =  false;                            
+                        }else{
+                            infofieldName.previousElementSibling.style.display = "none";
+                        }
+
+                    }
+
+                    break;
+
+                default: 
+
+                    if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infofieldName.value == '')){
+                        infofieldName.previousElementSibling.style.display = "block";
+                        formValide =  false;
+                        
+                    }else if(infofieldName.previousElementSibling !== null && formValide){
+                        infofieldName.previousElementSibling.style.display = "none";
+
+                    } 
+
+            }
+
+
+
+        });
+
+        if(formValide){
+            const formData = new FormData(form);
+            sendForm(formData,inputs);
+        }
+
+    });
+
+}
+
+async function sendForm(params,inputs) {
+    
+    try {
+
+        const objetParams ={};
+        for(const [key,value] of params){
+
+            if(objetParams[key]){
+                objetParams[key] = [].concat(objetParams[key],value);
+
+            }else{
+                objetParams[key] = value;
+                
+            }
+        }
+
+        const response = await fetch("php/form-handler.php",{
+            method: 'POST',
+            headers: {
+                 "Content-Type": "application/json"
+            },
+            body: JSON.stringify(objetParams)
+        });
+
+        if(!response.ok){
+            throw new Error(`Statut de réponse: ${response.status}`);
+        }
+
+        const resultat = await response.json();
+
+        const messageSucces = document.createElement("p");
+        messageSucces.className = "succes";
+        messageSucces.id = "succes"
+        messageSucces.innerHTML =  "Le formulaire a été envoyé avec succès avec les infos suivante: ";
+
+        //Delete the previous message
+        const isSuccessExists = document.getElementById("succes");
+        if(isSuccessExists){
+            isSuccessExists.remove();
+        }
+
+        document.getElementById("divForm").prepend(messageSucces);
+
+        for (const clef in resultat.donnees){
+
+            const ligneResultat = document.createElement("p");
+            ligneResultat.className = "resultat";
+            ligneResultat.textContent = `${clef}: ${resultat.donnees[clef]}`;
+
+            document.getElementById("succes").appendChild(ligneResultat);
+        }
+
+        inputs.forEach(input =>{
+            input.value = "";
+            input.checked = false;
+        });
+
+    } catch (error) {
+         divForm.innerText = "Une erreur est survenu" + ' ' + error;
+    }
+}

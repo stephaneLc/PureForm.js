@@ -105,7 +105,7 @@
         {
             "tag" : "input",
             "class" : "",
-            "id" : "",
+            "id" : "availability",
             "type" : "radio",
             "label" : {
                 "fr" : "Disponibilité",
@@ -150,7 +150,7 @@
         {
             "tag" : "input",
             "class" : "",
-            "id" : "",
+            "id" : "skill",
             "type" : "checkbox",
             "label" : {
                 "fr" : "Compétence",
@@ -160,6 +160,7 @@
             "validation" : {
                 "required" : {
                         "value" : true,
+                        "minChecked" : 2,
                         "message" : {
                             "fr" : "Vous devez faire au moins un choix",
                             "en" : "You must make at least one choice"
@@ -221,7 +222,7 @@
         {
             "tag" : "select",
             "class" : "",
-            "id" : "",
+            "id" : "experience",
             "type" : "",
             "label" : {
                 "fr" : "Votre expérience",
@@ -238,6 +239,13 @@
                     }
             },
             "options" : [
+                {
+                    "value" : "",
+                    "text" : {
+                        "fr" : "Votre niveau d'expérience",
+                        "en" : "Your level of experience"
+                    }
+                },
                 {
                     "value" : "junior",
                     "text" : {
@@ -263,9 +271,9 @@
 
         },
         {
-            "tag" : "texarea",
+            "tag" : "textarea",
             "class" : "",
-            "id" : "",
+            "id" : "message",
             "type" : "",
             "label" : {
                 "fr" : "Message de motivation",
