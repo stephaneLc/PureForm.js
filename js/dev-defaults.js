@@ -42,5 +42,8 @@ function fillFormAuto(){
     });
 }
 
-setTimeout(fillFormAuto, 500)
+setTimeout(() => {
+    fillFormAuto();
+    floatingLabelsOnInput();
+}, 500);
 

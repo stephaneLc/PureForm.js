@@ -55,13 +55,18 @@ async function constructForm(divForm, language) {
             const label = document.createElement("label");
                           label.setAttribute("for", formElement.id);
                           label.innerHTML = formElement.label[language];
+            
+            let errorMessage = null;
 
-            const errorMessage = document.createElement("p");
-                                errorMessage.className = "message error";
+                if(formElement.validation.required.value){
+                    errorMessage = document.createElement("p");
+                        errorMessage.className = "message error";
 
-                                if(formElement.validation.required.message?.[language]){
-                                    errorMessage.innerHTML = formElement.validation.required.message[language]
-                                }
+                        if(formElement.validation.required.message?.[language]){
+                            errorMessage.innerHTML = formElement.validation.required.message[language]
+                        }
+                }
+
 
             switch (formElement.tag) {
                 case "select":
@@ -77,22 +82,31 @@ async function constructForm(divForm, language) {
                     const labelSelect = document.createElement("label");
                                 labelSelect.setAttribute("for", formElement.id);
                                 labelSelect.innerHTML = formElement.label[language];
-                                
-                    const errorMessageSelect = document.createElement("p");
-                                errorMessageSelect.className = "error";
 
-                                if(formElement.validation.message?.[language]){
-                                    errorMessageSelect.innerHTML = formElement.validation.required.message[language]
-                                }
+                    let errorMessageSelect = null; 
 
+                    if(formElement.validation.required.value){
+                            errorMessageSelect = document.createElement("p");
+                            errorMessageSelect.className = "message error";
+
+                            if(formElement.validation.required.message?.[language]){
+                                errorMessageSelect.innerHTML = formElement.validation.required.message[language];
+                            }
+                    }
+
+ 
                     formElement.options.forEach(option =>{
                            tagSelect.add(new Option(option.text[language],option.value));
                            
                     });
 
                     containerSelect.className = "form__select";
+
+                    if(errorMessageSelect){
+                        containerSelect.appendChild(errorMessageSelect);
+                    }
+                    
                     containerSelect.appendChild(labelSelect);
-                    containerSelect.appendChild(errorMessageSelect);
                     containerSelect.appendChild(tagSelect);
 
                     form.appendChild(containerSelect);
@@ -104,19 +118,13 @@ async function constructForm(divForm, language) {
                     switch (formElement.type) {
                         case 'radio':
                         case 'checkbox':
-
+                            const containerGroupFieldset = document.createElement("div");
                             const fieldset = document.createElement('fieldset');
                             const legend = document.createElement('legend');
 
+                                containerGroupFieldset.className = "form__group";
                                 legend.innerHTML = formElement.label[language];
                                 fieldset.appendChild(legend);
-
-                                const errorMessageCase = document.createElement("p");
-                                    errorMessageCase.className = "error";
-
-                                    if(formElement.validation.required.message?.[language]){
-                                        errorMessageCase.innerHTML = formElement.validation.required.message[language]
-                                    }
 
                                 formElement.options.forEach(option => {
                                     
@@ -138,16 +146,21 @@ async function constructForm(divForm, language) {
 
                                 });
                                  
-                                fieldset.appendChild(legend);
-                                fieldset.appendChild(errorMessage);
-                                form.appendChild(fieldset);
+                                if(errorMessage){
+                                    containerGroupFieldset.appendChild(errorMessage);
+                                }
+                                
+                                containerGroupFieldset.appendChild(fieldset);
+                         
+                                form.appendChild(containerGroupFieldset);
 
                             break;
                     
                         default:
+                            const containerGroup = document.createElement("div");
                             const containerInput = document.createElement("div");
                             const tagInput = document.createElement(formElement.tag);
-                            
+
                             if(formElement.id !==''){
                                 tagInput.setAttribute("id", formElement.id);
                                 containerInput.className = "inputLabel";
@@ -159,24 +172,32 @@ async function constructForm(divForm, language) {
                                 tagInput.setAttribute("cols",50);
                                 containerInput.className = "form__textarea";
                                 containerInput.appendChild(label);
-                                containerInput.appendChild(errorMessage);
+
+                                if(errorMessage){
+                                    containerInput.appendChild(errorMessage);
+                                }
+
                                 containerInput.appendChild(tagInput);
                                 
                             }else{
+                                containerGroup.className = "form__group";
                                 containerInput.className = "form__field";
                                 tagInput.setAttribute("type", formElement.type);
                                 tagInput.setAttribute("value", ""); 
                                 
-                                containerInput.appendChild(errorMessage);
-                                containerInput.appendChild(tagInput);
-                                containerInput.appendChild(label);
+                                if(errorMessage){
+                                    containerGroup.appendChild(errorMessage);
+                                }
+                                    containerInput.appendChild(tagInput);
+                                    containerInput.appendChild(label);
                             }
                             
-                            containerInput.appendChild(label);
-                            containerInput.appendChild(errorMessage);
-                            containerInput.appendChild(tagInput);
-                            
-                            form.appendChild(containerInput);
+                                if(errorMessage){
+                                    containerGroup.appendChild(errorMessage);
+                                }
+                                
+                                    containerGroup.appendChild(containerInput);
+                                    form.appendChild(containerGroup);
 
                         break;
                     }
@@ -189,6 +210,8 @@ async function constructForm(divForm, language) {
         });
 
         checkFields(form,dataJson.fields,language);
+        floatingLabelsOnInput();
+        optionSelected();
 
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
@@ -251,9 +274,6 @@ function optionSelected(){
 
 }
 
-floatingLabelsOnInput();
-optionSelected();
-
 
 async function checkFields(form, jsonData, language) {
     const btnSubmit = document.querySelector("button");
@@ -274,7 +294,7 @@ async function checkFields(form, jsonData, language) {
                 case "radio":
                         const groupeRadio = document.querySelectorAll(`[name="${input.name}"]`);
                         const isRadioChecked = Array.from(groupeRadio).some(radio => radio.checked);
-                        const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+                        const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('.form__group').querySelector('.error');
                         
                         if(isRadioChecked){
                             errorRadio.style.display = 'none';
@@ -286,7 +306,7 @@ async function checkFields(form, jsonData, language) {
                 case "checkbox": 
                     const groupeCheckbox = document.querySelectorAll(`[name="${input.name}"]`);
                     const isCheckboxChecked = Array.from(groupeCheckbox).filter(check => check.checked).length >= compareInputToDataJson.validation.required.minChecked;
-                    const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+                    const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('.form__group').querySelector('.error');
 
                     if(isCheckboxChecked){
                         errorCheckbox.style.display = 'none';
@@ -299,17 +319,17 @@ async function checkFields(form, jsonData, language) {
                 case "email": 
 
                     if(compareInputToDataJson.validation.required.value && input.value ===''){
-                            infofieldName.previousElementSibling.style.display = "block";
+                            infofieldName.parentElement.previousElementSibling.style.display = "block";
                             formValide =  false;
                     }else if(compareInputToDataJson.validation.format && input.value !==''){
                         const phoneRegex =  new RegExp(compareInputToDataJson.validation.format.pattern);
 
                         if(!phoneRegex.test(input.value)){
-                            infofieldName.previousElementSibling.innerHTML = compareInputToDataJson.validation.format.message[language];
-                            infofieldName.previousElementSibling.style.display = "block";
+                            infofieldName.parentElement.previousElementSibling.innerHTML = compareInputToDataJson.validation.format.message[language];
+                            infofieldName.parentElement.previousElementSibling.style.display = "block";
                             formValide =  false;                            
                         }else{
-                            infofieldName.previousElementSibling.style.display = "none";
+                            infofieldName.parentElement.previousElementSibling.style.display = "none";
                         }
 
                     }
@@ -319,17 +339,26 @@ async function checkFields(form, jsonData, language) {
                 default: 
 
                     if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infofieldName.value == '')){
-                        infofieldName.previousElementSibling.style.display = "block";
-                        formValide =  false;
                         
-                    }else if(infofieldName.previousElementSibling !== null && formValide){
-                        infofieldName.previousElementSibling.style.display = "none";
+                        formValide =  false;
+
+                        if(compareInputToDataJson.tag === 'select'){
+                            infofieldName.closest(".form__select").querySelector('.error').style.display ="block"
+                        }else{
+                            infofieldName.parentElement.previousElementSibling.style.display = "block";
+                        }
+
+                    }else if(infofieldName.parentElement.previousElementSibling !== null){
+                        
+                        if(compareInputToDataJson.tag === 'select'){
+                            infofieldName.closest(".form__select").querySelector('.error').style.display ="none"
+                        }else{
+                            infofieldName.parentElement.previousElementSibling.style.display = "none";
+                        }
 
                     } 
 
             }
-
-
 
         });
 
@@ -373,7 +402,7 @@ async function sendForm(params,inputs) {
         const resultat = await response.json();
 
         const messageSucces = document.createElement("p");
-        messageSucces.className = "succes";
+        messageSucces.className = "message succes";
         messageSucces.id = "succes"
         messageSucces.innerHTML =  "Le formulaire a été envoyé avec succès avec les infos suivante: ";
 
@@ -395,9 +424,16 @@ async function sendForm(params,inputs) {
         }
 
         inputs.forEach(input =>{
-            input.value = "";
-            input.checked = false;
+           
+            if(input.type === 'radio' || input.type === 'checkbox'){
+                input.checked = false;
+            }else{
+                input.value = "";
+            }
+
         });
+
+        floatingLabelsOnInput();
 
     } catch (error) {
          divForm.innerText = "Une erreur est survenu" + ' ' + error;
