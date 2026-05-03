@@ -79,20 +79,20 @@ async function constructForm(divForm, language) {
                                 labelSelect.innerHTML = formElement.label[language];
                                 
                     const errorMessageSelect = document.createElement("p");
-                                errorMessageSelect.className = "error";
+                                errorMessageSelect.className = "message error";
 
-                                if(formElement.validation.message?.[language]){
-                                    errorMessageSelect.innerHTML = formElement.validation.required.message[language]
+                                if(formElement.validation.required.message?.[language]){
+                                    errorMessageSelect.innerHTML = formElement.validation.required.message[language];
                                 }
-
+ 
                     formElement.options.forEach(option =>{
                            tagSelect.add(new Option(option.text[language],option.value));
                            
                     });
 
                     containerSelect.className = "form__select";
-                    containerSelect.appendChild(labelSelect);
                     containerSelect.appendChild(errorMessageSelect);
+                    containerSelect.appendChild(labelSelect);
                     containerSelect.appendChild(tagSelect);
 
                     form.appendChild(containerSelect);
