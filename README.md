@@ -34,6 +34,12 @@ Je me suis mis des contraintes volontaires pour le développement du projet pour
 
 - À venir à la fin du projet
 
+## Outils de développement
+
+- **Autofill du formulaire** [dev-defaults.js](js/dev-defaults.js) : 
+
+Fichier de développement qui remplit automatiquement les champs du formulaire pour accélérer le développement, les tests de validation et d'envoi. À retirer en production
+
 ### Démarche et raisonement
 
 [Démarche et raisonnement](REFLEXION.md)
