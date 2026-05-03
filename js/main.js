@@ -189,6 +189,8 @@ async function constructForm(divForm, language) {
         });
 
         checkFields(form,dataJson.fields,language);
+        floatingLabelsOnInput();
+        optionSelected();
 
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
@@ -250,9 +252,6 @@ function optionSelected(){
     });
 
 }
-
-floatingLabelsOnInput();
-optionSelected();
 
 
 async function checkFields(form, jsonData, language) {
