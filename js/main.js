@@ -112,13 +112,6 @@ async function constructForm(divForm, language) {
                                 legend.innerHTML = formElement.label[language];
                                 fieldset.appendChild(legend);
 
-                                const errorMessageCase = document.createElement("p");
-                                    errorMessageCase.className = "error";
-
-                                    if(formElement.validation.required.message?.[language]){
-                                        errorMessageCase.innerHTML = formElement.validation.required.message[language]
-                                    }
-
                                 formElement.options.forEach(option => {
                                     
                                     const radioCheckInput = document.createElement(formElement.tag); 
