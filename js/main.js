@@ -172,10 +172,10 @@ async function constructForm(divForm, language) {
                                 containerInput.appendChild(label);
                             }
                             
+                            containerInput.appendChild(tagInput);
                             containerInput.appendChild(label);
                             containerInput.appendChild(errorMessage);
-                            containerInput.appendChild(tagInput);
-                            
+ 
                             form.appendChild(containerInput);
 
                         break;
