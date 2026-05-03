@@ -145,9 +145,10 @@ async function constructForm(divForm, language) {
                             break;
                     
                         default:
+                            const containerGroup = document.createElement("div");
                             const containerInput = document.createElement("div");
                             const tagInput = document.createElement(formElement.tag);
-                            
+
                             if(formElement.id !==''){
                                 tagInput.setAttribute("id", formElement.id);
                                 containerInput.className = "inputLabel";
@@ -163,20 +164,19 @@ async function constructForm(divForm, language) {
                                 containerInput.appendChild(tagInput);
                                 
                             }else{
+                                containerGroup.className = "form__group";
                                 containerInput.className = "form__field";
                                 tagInput.setAttribute("type", formElement.type);
                                 tagInput.setAttribute("value", ""); 
                                 
-                                containerInput.appendChild(errorMessage);
+                                containerGroup.appendChild(errorMessage);
                                 containerInput.appendChild(tagInput);
                                 containerInput.appendChild(label);
                             }
                             
-                            containerInput.appendChild(tagInput);
-                            containerInput.appendChild(label);
-                            containerInput.appendChild(errorMessage);
- 
-                            form.appendChild(containerInput);
+                            containerGroup.appendChild(errorMessage);
+                            containerGroup.appendChild(containerInput);
+                            form.appendChild(containerGroup);
 
                         break;
                     }
