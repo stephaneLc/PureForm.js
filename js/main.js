@@ -360,8 +360,6 @@ async function checkFields(form, jsonData, language) {
 
             }
 
-
-
         });
 
         if(formValide){
@@ -426,9 +424,15 @@ async function sendForm(params,inputs) {
         }
 
         inputs.forEach(input =>{
-            input.value = "";
-            input.checked = false;
+           
+            if(input.type === 'radio' || input.type === 'checkbox'){
+                input.checked = false;
+            }else{
+                input.value = "";
+            }
+
         });
+
         floatingLabelsOnInput();
 
     } catch (error) {
