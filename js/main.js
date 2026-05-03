@@ -122,7 +122,7 @@ async function constructForm(divForm, language) {
                             const fieldset = document.createElement('fieldset');
                             const legend = document.createElement('legend');
 
-                                containerGroupFieldset.className = "form_group";
+                                containerGroupFieldset.className = "form__group";
                                 legend.innerHTML = formElement.label[language];
                                 fieldset.appendChild(legend);
 
@@ -294,7 +294,7 @@ async function checkFields(form, jsonData, language) {
                 case "radio":
                         const groupeRadio = document.querySelectorAll(`[name="${input.name}"]`);
                         const isRadioChecked = Array.from(groupeRadio).some(radio => radio.checked);
-                        const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+                        const errorRadio = document.querySelector(`[name="${input.name}"]`).closest('.form__group').querySelector('.error');
                         
                         if(isRadioChecked){
                             errorRadio.style.display = 'none';
@@ -306,7 +306,7 @@ async function checkFields(form, jsonData, language) {
                 case "checkbox": 
                     const groupeCheckbox = document.querySelectorAll(`[name="${input.name}"]`);
                     const isCheckboxChecked = Array.from(groupeCheckbox).filter(check => check.checked).length >= compareInputToDataJson.validation.required.minChecked;
-                    const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('fieldset').querySelector('.error');
+                    const errorCheckbox = document.querySelector(`[name="${input.name}"]`).closest('.form__group').querySelector('.error');
 
                     if(isCheckboxChecked){
                         errorCheckbox.style.display = 'none';
@@ -319,17 +319,17 @@ async function checkFields(form, jsonData, language) {
                 case "email": 
 
                     if(compareInputToDataJson.validation.required.value && input.value ===''){
-                            infofieldName.previousElementSibling.style.display = "block";
+                            infofieldName.parentElement.previousElementSibling.style.display = "block";
                             formValide =  false;
                     }else if(compareInputToDataJson.validation.format && input.value !==''){
                         const phoneRegex =  new RegExp(compareInputToDataJson.validation.format.pattern);
 
                         if(!phoneRegex.test(input.value)){
-                            infofieldName.previousElementSibling.innerHTML = compareInputToDataJson.validation.format.message[language];
-                            infofieldName.previousElementSibling.style.display = "block";
+                            infofieldName.parentElement.previousElementSibling.innerHTML = compareInputToDataJson.validation.format.message[language];
+                            infofieldName.parentElement.previousElementSibling.style.display = "block";
                             formValide =  false;                            
                         }else{
-                            infofieldName.previousElementSibling.style.display = "none";
+                            infofieldName.parentElement.previousElementSibling.style.display = "none";
                         }
 
                     }
@@ -339,11 +339,22 @@ async function checkFields(form, jsonData, language) {
                 default: 
 
                     if(compareInputToDataJson && compareInputToDataJson.validation.required.value && (input.value =='' || infofieldName.value == '')){
-                        infofieldName.previousElementSibling.style.display = "block";
-                        formValide =  false;
                         
-                    }else if(infofieldName.previousElementSibling !== null && formValide){
-                        infofieldName.previousElementSibling.style.display = "none";
+                        formValide =  false;
+
+                        if(compareInputToDataJson.tag === 'select'){
+                            infofieldName.closest(".form__select").querySelector('.error').style.display ="block"
+                        }else{
+                            infofieldName.parentElement.previousElementSibling.style.display = "block";
+                        }
+                        
+                    }else if(infofieldName.parentElement.previousElementSibling !== null){
+                        
+                        if(compareInputToDataJson.tag === 'select'){
+                            infofieldName.closest(".form__select").querySelector('.error').style.display ="none"
+                        }else{
+                            infofieldName.parentElement.previousElementSibling.style.display = "none";
+                        }
 
                     } 
 
