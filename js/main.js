@@ -347,7 +347,7 @@ async function checkFields(form, jsonData, language) {
                         }else{
                             infofieldName.parentElement.previousElementSibling.style.display = "block";
                         }
-                        
+
                     }else if(infofieldName.parentElement.previousElementSibling !== null){
                         
                         if(compareInputToDataJson.tag === 'select'){
@@ -404,7 +404,7 @@ async function sendForm(params,inputs) {
         const resultat = await response.json();
 
         const messageSucces = document.createElement("p");
-        messageSucces.className = "succes";
+        messageSucces.className = "message succes";
         messageSucces.id = "succes"
         messageSucces.innerHTML =  "Le formulaire a été envoyé avec succès avec les infos suivante: ";
 
@@ -429,6 +429,7 @@ async function sendForm(params,inputs) {
             input.value = "";
             input.checked = false;
         });
+        floatingLabelsOnInput();
 
     } catch (error) {
          divForm.innerText = "Une erreur est survenu" + ' ' + error;
