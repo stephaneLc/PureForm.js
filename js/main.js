@@ -104,10 +104,11 @@ async function constructForm(divForm, language) {
                     switch (formElement.type) {
                         case 'radio':
                         case 'checkbox':
-
+                            const containerGroupFieldset = document.createElement("div");
                             const fieldset = document.createElement('fieldset');
                             const legend = document.createElement('legend');
 
+                                containerGroupFieldset.className = "form_group";
                                 legend.innerHTML = formElement.label[language];
                                 fieldset.appendChild(legend);
 
@@ -138,9 +139,10 @@ async function constructForm(divForm, language) {
 
                                 });
                                  
-                                fieldset.appendChild(legend);
-                                fieldset.appendChild(errorMessage);
-                                form.appendChild(fieldset);
+                                containerGroupFieldset.appendChild(errorMessage);
+                                containerGroupFieldset.appendChild(fieldset);
+                         
+                                form.appendChild(containerGroupFieldset);
 
                             break;
                     
