@@ -137,15 +137,15 @@ async function constructForm(divForm, language) {
                                     const radioCheckInput = document.createElement(formElement.tag); 
                                     const label = document.createElement("label");
                                    
-                                                label.innerHTML = option.text[language];
+                                            label.innerHTML = option.text[language];
 
-                                                radioCheckInput.setAttribute("name", formElement.name);
-                                                radioCheckInput.setAttribute("type",formElement.type);
-                                                radioCheckInput.setAttribute("value", option.value);
+                                            radioCheckInput.setAttribute("name", formElement.name);
+                                            radioCheckInput.setAttribute("type",formElement.type);
+                                            radioCheckInput.setAttribute("value", option.value);
 
-                                                if(formElement.id !==''){
-                                                    radioCheckInput.setAttribute("id", formElement.id);
-                                                }
+                                            if(formElement.id !==''){
+                                                radioCheckInput.setAttribute("id", formElement.id);
+                                            }
 
                                     label.prepend(radioCheckInput);
                                     fieldset.appendChild(label);
@@ -219,6 +219,7 @@ async function constructForm(divForm, language) {
         checkFields(form,dataJson.fields,dataJson.form.message,language);
         floatingLabelsOnInput();
         optionSelected();
+        autoCheckedOnAll();
 
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
@@ -467,4 +468,35 @@ function deleteGenericMessage(){
         isSuccessExists.remove();
     }
 
+}
+
+function autoCheckedOnAll(){
+
+    const checkboxAll = document.querySelector('input[type="checkbox"][value="all"]');
+    const allCheckBox = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxAll.addEventListener('change', function(){
+        allCheckBox.forEach(checkbox =>{
+            checkbox.checked = checkboxAll.checked;
+        });
+    });
+
+    allCheckBox.forEach(checkbox =>{
+        if(checkbox !== checkboxAll){
+            checkbox.addEventListener('change', function(){
+                if(!checkbox.checked){
+                    checkboxAll.checked = false
+                }else{
+                    const allChecked = Array.from(allCheckBox)
+                    .filter(oneCheckBox => oneCheckBox !== checkboxAll)
+                    .every(oneCheckBox => oneCheckBox.checked);
+                        checkboxAll.checked = allChecked;
+                }
+
+            });
+
+        }
+
+    });
+    
 }
