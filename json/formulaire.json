@@ -8,7 +8,18 @@
             "id" : "form",
             "class" : "form",
             "action": "",
-            "method" : "GET"
+            "method" : "GET",
+            "message" : {
+                "succes" : {
+                    "fr" : "Le formulaire a été envoyé avec succès",
+                    "en" : "The form has been successfully submitted."
+                },
+                "error" : {
+                    "fr" : "Une erreur est survenu, veuillez remplir les champs obligatoire",
+                    "en" : "An error has occurred, please fill in the required fields"
+                }
+
+            }
         },
     "fields" : [
         {
