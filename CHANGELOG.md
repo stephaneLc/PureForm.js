@@ -7,7 +7,7 @@
 
 - Mise en page de la page
 - Mise en page du formulaire avec les composantes
-- Affichage des messsages d'erreur dynamiques
+- Affichage des messages d'erreur dynamiques
 - Validation des champs côté client
 - Envoi formulaire via Fetch API avec traitement PHP
 - Génération dynamique du formulaire via un JSON
@@ -16,6 +16,11 @@
 - Fonction positionnement du label pour un input rempli
 - Fonction pour afficher état du select avec option sélectionner
 - Style guide de mise en page des composantes
+- Afficher message d'erreur générique au formulaire
+- Gestion automatique de la case 'Tous les choix' - coche toutes cases ou se coche quand tous sont sélectionnés
+- Ajouter le formatage automatique du champ téléphone au format 555-555-5555
+
+
 
 
 ### Corrigé
@@ -29,8 +34,13 @@
 - Correction du vidage des valeurs radio/checkbox après l'envoi du formulaire
 - Remettre le label à l'état inital après l'envoi du formulaire
 - Correction syntaxe nom de class pour afficher le style message de succès
+- Correction alignement des éléments du formulaire lors de l'affichage des messages d'erreurs
 
 ### Modifié
 
 - Renommage des variables SASS commun (input, select, textarea) en '--field-base'
+- Rendre les messages générique du formulaire dynamique à partir du JSON
+- Optimiser le retrait du message succès ou erreur dans une même fonction
+- Rendre le nombre minimum de cases à cocher dynamique dans le message d'erreur
+- Mise en page du bloc de résultat
 

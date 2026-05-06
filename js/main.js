@@ -63,7 +63,13 @@ async function constructForm(divForm, language) {
                         errorMessage.className = "message error";
 
                         if(formElement.validation.required.message?.[language]){
-                            errorMessage.innerHTML = formElement.validation.required.message[language]
+
+                            if(formElement.type === "checkbox"){
+                                errorMessage.innerHTML = formElement.validation.required.message[language].replace("{minChecked}",formElement.validation.required.minChecked);
+                            }else{
+                                errorMessage.innerHTML = formElement.validation.required.message[language];
+                            }
+                           
                         }
                 }
 
@@ -131,15 +137,15 @@ async function constructForm(divForm, language) {
                                     const radioCheckInput = document.createElement(formElement.tag); 
                                     const label = document.createElement("label");
                                    
-                                                label.innerHTML = option.text[language];
+                                            label.innerHTML = option.text[language];
 
-                                                radioCheckInput.setAttribute("name", formElement.name);
-                                                radioCheckInput.setAttribute("type",formElement.type);
-                                                radioCheckInput.setAttribute("value", option.value);
+                                            radioCheckInput.setAttribute("name", formElement.name);
+                                            radioCheckInput.setAttribute("type",formElement.type);
+                                            radioCheckInput.setAttribute("value", option.value);
 
-                                                if(formElement.id !==''){
-                                                    radioCheckInput.setAttribute("id", formElement.id);
-                                                }
+                                            if(formElement.id !==''){
+                                                radioCheckInput.setAttribute("id", formElement.id);
+                                            }
 
                                     label.prepend(radioCheckInput);
                                     fieldset.appendChild(label);
@@ -147,6 +153,7 @@ async function constructForm(divForm, language) {
                                 });
                                  
                                 if(errorMessage){
+                                    
                                     containerGroupFieldset.appendChild(errorMessage);
                                 }
                                 
@@ -209,9 +216,11 @@ async function constructForm(divForm, language) {
 
         });
 
-        checkFields(form,dataJson.fields,language);
+        checkFields(form,dataJson.fields,dataJson.form.message,language);
         floatingLabelsOnInput();
         optionSelected();
+        autoFormatPhone();
+        autoCheckedOnAll();
 
     } catch (error) {
         divForm.innerText = "Une erreur est survenu" + ' ' + error;
@@ -275,10 +284,10 @@ function optionSelected(){
 }
 
 
-async function checkFields(form, jsonData, language) {
+async function checkFields(form, jsonData, formMessages,language) {
     const btnSubmit = document.querySelector("button");
     const inputs = document.querySelectorAll("input,select,textarea");
-  
+
     btnSubmit.addEventListener('click', function(event){
         event.preventDefault();
 
@@ -364,14 +373,25 @@ async function checkFields(form, jsonData, language) {
 
         if(formValide){
             const formData = new FormData(form);
-            sendForm(formData,inputs);
+            sendForm(formData,inputs,formMessages,language);
+            
+        }else{
+
+            deleteGenericMessage();
+
+            const messageError = document.createElement("p");
+            messageError.className = "message error generic";
+            messageError.id = "error"
+            messageError.innerHTML =  formMessages.error[language];
+
+            form.before(messageError);
         }
 
     });
 
 }
 
-async function sendForm(params,inputs) {
+async function sendForm(params,inputs,formMessages,language) {
     
     try {
 
@@ -404,24 +424,36 @@ async function sendForm(params,inputs) {
         const messageSucces = document.createElement("p");
         messageSucces.className = "message succes";
         messageSucces.id = "succes"
-        messageSucces.innerHTML =  "Le formulaire a été envoyé avec succès avec les infos suivante: ";
+        messageSucces.innerHTML =  formMessages.succes[language];
 
-        //Delete the previous message
-        const isSuccessExists = document.getElementById("succes");
-        if(isSuccessExists){
-            isSuccessExists.remove();
+        deleteGenericMessage();
+
+        form.before(messageSucces);
+        
+        const conteneurResultat = document.createElement("div");
+        const titleContenuResultat = document.createElement("h3");
+        let titleResultat = "";
+
+        if(language ==='fr'){
+                titleResultat = 'Résultat de l\'envoi';
+        }else{
+                titleResultat = 'Result of the submission';
         }
 
-        document.getElementById("divForm").prepend(messageSucces);
+        titleContenuResultat.textContent = titleResultat;
+        conteneurResultat.className = "resultat";
+        conteneurResultat.id ="resultat";
+        conteneurResultat.appendChild(titleContenuResultat);
 
         for (const clef in resultat.donnees){
 
             const ligneResultat = document.createElement("p");
-            ligneResultat.className = "resultat";
-            ligneResultat.textContent = `${clef}: ${resultat.donnees[clef]}`;
-
-            document.getElementById("succes").appendChild(ligneResultat);
+                  ligneResultat.innerHTML = `<strong>${clef}:</strong> ${resultat.donnees[clef]}`;
+            
+                  conteneurResultat.appendChild(ligneResultat);
         }
+
+        document.getElementById("succes").after(conteneurResultat);
 
         inputs.forEach(input =>{
            
@@ -438,4 +470,73 @@ async function sendForm(params,inputs) {
     } catch (error) {
          divForm.innerText = "Une erreur est survenu" + ' ' + error;
     }
+}
+
+
+function deleteGenericMessage(){
+
+    const isMessageError = document.getElementById("error");
+    if(isMessageError){
+        isMessageError.remove();
+    }
+
+    const isSuccessExists = document.getElementById("succes");
+    if(isSuccessExists){
+        isSuccessExists.remove();
+    }
+
+    const isResultat = document.getElementById("resultat");
+    if(isResultat){
+        isResultat.remove();
+    }
+
+}
+
+function autoCheckedOnAll(){
+
+    const checkboxAll = document.querySelector('input[type="checkbox"][value="all"]');
+    const allCheckBox = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxAll.addEventListener('change', function(){
+        allCheckBox.forEach(checkbox =>{
+            checkbox.checked = checkboxAll.checked;
+        });
+    });
+
+    allCheckBox.forEach(checkbox =>{
+        if(checkbox !== checkboxAll){
+            checkbox.addEventListener('change', function(){
+                if(!checkbox.checked){
+                    checkboxAll.checked = false
+                }else{
+                    const allChecked = Array.from(allCheckBox)
+                    .filter(oneCheckBox => oneCheckBox !== checkboxAll)
+                    .every(oneCheckBox => oneCheckBox.checked);
+                        checkboxAll.checked = allChecked;
+                }
+
+            });
+
+        }
+
+    });
+    
+}
+
+function autoFormatPhone(){
+    const inputPhone = document.querySelector('input[type="tel"]');
+
+    inputPhone.addEventListener('input', function(){
+        let digits = inputPhone.value.replace(/\D/g,'').slice(0,10); 
+
+        if(digits.length > 6){
+            inputPhone.value =  `${digits.slice(0,3)}-${digits.slice(3,6)}-${digits.slice(6)}`;
+        }else if(digits.length > 3){
+            inputPhone.value =  `${digits.slice(0,3)}-${digits.slice(3)}`;
+        }else{
+            inputPhone.value = digits;
+        }
+
+    });
+
 }

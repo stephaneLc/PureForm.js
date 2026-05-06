@@ -8,7 +8,18 @@
             "id" : "form",
             "class" : "form",
             "action": "",
-            "method" : "GET"
+            "method" : "GET",
+            "message" : {
+                "succes" : {
+                    "fr" : "Le formulaire a été envoyé avec succès",
+                    "en" : "The form has been successfully submitted."
+                },
+                "error" : {
+                    "fr" : "Une erreur est survenu, veuillez remplir les champs obligatoire",
+                    "en" : "An error has occurred, please fill in the required fields"
+                }
+
+            }
         },
     "fields" : [
         {
@@ -162,8 +173,8 @@
                         "value" : true,
                         "minChecked" : 2,
                         "message" : {
-                            "fr" : "Vous devez faire au moins un choix",
-                            "en" : "You must make at least one choice"
+                            "fr" : "Vous devez faire au moins {minChecked} choix",
+                            "en" : "You must make at least {minChecked} choice"
                         }
                     }
             },
