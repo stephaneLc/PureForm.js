@@ -250,7 +250,6 @@
         color: #00c853;
         background-color: rgba(0, 200, 83, 0.05);
         border-color: #00c853;
-
     }
 
     &.error{
@@ -259,6 +258,11 @@
         border-color:#ff2d00;
         width: 100%;
         display: none;
+
+        &.generic{
+            display: block;
+            text-align: center;
+        }
     }
 
 }
