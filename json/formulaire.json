@@ -173,8 +173,8 @@
                         "value" : true,
                         "minChecked" : 2,
                         "message" : {
-                            "fr" : "Vous devez faire au moins un choix",
-                            "en" : "You must make at least one choice"
+                            "fr" : "Vous devez faire au moins {minChecked} choix",
+                            "en" : "You must make at least {minChecked} choice"
                         }
                     }
             },

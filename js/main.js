@@ -63,7 +63,13 @@ async function constructForm(divForm, language) {
                         errorMessage.className = "message error";
 
                         if(formElement.validation.required.message?.[language]){
-                            errorMessage.innerHTML = formElement.validation.required.message[language]
+
+                            if(formElement.type === "checkbox"){
+                                errorMessage.innerHTML = formElement.validation.required.message[language].replace("{minChecked}",formElement.validation.required.minChecked);
+                            }else{
+                                errorMessage.innerHTML = formElement.validation.required.message[language];
+                            }
+                           
                         }
                 }
 
@@ -147,6 +153,7 @@ async function constructForm(divForm, language) {
                                 });
                                  
                                 if(errorMessage){
+                                    
                                     containerGroupFieldset.appendChild(errorMessage);
                                 }
                                 
@@ -365,6 +372,7 @@ async function checkFields(form, jsonData, formMessages,language) {
         if(formValide){
             const formData = new FormData(form);
             sendForm(formData,inputs,formMessages,language);
+            
         }else{
 
             deleteGenericMessage();
