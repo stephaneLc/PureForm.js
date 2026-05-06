@@ -427,16 +427,32 @@ async function sendForm(params,inputs,formMessages,language) {
 
         deleteGenericMessage();
 
-        document.getElementById("divForm").prepend(messageSucces);
+        form.before(messageSucces);
+        
+        const conteneurResultat = document.createElement("div");
+        const titleContenuResultat = document.createElement("h3");
+        let titleResultat = "";
+
+        if(language ==='fr'){
+                titleResultat = 'Résultat de l\'envoi';
+        }else{
+                titleResultat = 'Result of the submission';
+        }
+
+        titleContenuResultat.textContent = titleResultat;
+        conteneurResultat.className = "resultat";
+        conteneurResultat.id ="resultat";
+        conteneurResultat.appendChild(titleContenuResultat);
 
         for (const clef in resultat.donnees){
 
             const ligneResultat = document.createElement("p");
-            ligneResultat.className = "resultat";
-            ligneResultat.textContent = `${clef}: ${resultat.donnees[clef]}`;
-
-            document.getElementById("succes").appendChild(ligneResultat);
+                  ligneResultat.innerHTML = `<strong>${clef}:</strong> ${resultat.donnees[clef]}`;
+            
+                  conteneurResultat.appendChild(ligneResultat);
         }
+
+        document.getElementById("succes").after(conteneurResultat);
 
         inputs.forEach(input =>{
            
@@ -466,6 +482,11 @@ function deleteGenericMessage(){
     const isSuccessExists = document.getElementById("succes");
     if(isSuccessExists){
         isSuccessExists.remove();
+    }
+
+    const isResultat = document.getElementById("resultat");
+    if(isResultat){
+        isResultat.remove();
     }
 
 }

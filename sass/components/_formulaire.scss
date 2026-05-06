@@ -266,3 +266,14 @@
     }
 
 }
+
+.resultat{
+    border: 1px solid black;
+    padding: 15px;
+    margin-bottom: 15px;
+    width: fit-content;
+
+    strong{
+        text-transform: capitalize;
+    }
+}
