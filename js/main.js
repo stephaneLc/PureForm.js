@@ -219,6 +219,7 @@ async function constructForm(divForm, language) {
         checkFields(form,dataJson.fields,dataJson.form.message,language);
         floatingLabelsOnInput();
         optionSelected();
+        autoFormatPhone();
         autoCheckedOnAll();
 
     } catch (error) {
@@ -520,4 +521,22 @@ function autoCheckedOnAll(){
 
     });
     
+}
+
+function autoFormatPhone(){
+    const inputPhone = document.querySelector('input[type="tel"]');
+
+    inputPhone.addEventListener('input', function(){
+        let digits = inputPhone.value.replace(/\D/g,'').slice(0,10); 
+
+        if(digits.length > 6){
+            inputPhone.value =  `${digits.slice(0,3)}-${digits.slice(3,6)}-${digits.slice(6)}`;
+        }else if(digits.length > 3){
+            inputPhone.value =  `${digits.slice(0,3)}-${digits.slice(3)}`;
+        }else{
+            inputPhone.value = digits;
+        }
+
+    });
+
 }
