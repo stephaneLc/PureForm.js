@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=>{
     const divForm = document.getElementById("divForm");
-    const btnsLang = document.querySelectorAll(".btn__language");
+    const btnsLang = document.querySelectorAll(".language");
     const langDefault = 'fr';
     let language =  document.documentElement.lang = langDefault;
 
