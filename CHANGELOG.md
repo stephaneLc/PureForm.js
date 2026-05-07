@@ -19,6 +19,7 @@
 - Afficher message d'erreur générique au formulaire
 - Gestion automatique de la case 'Tous les choix' - coche toutes cases ou se coche quand tous sont sélectionnés
 - Ajouter le formatage automatique du champ téléphone au format 555-555-5555
+- Ajouter le changement de langue
 
 
 
