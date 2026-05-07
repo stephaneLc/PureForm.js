@@ -19,6 +19,7 @@
 - Afficher message d'erreur générique au formulaire
 - Gestion automatique de la case 'Tous les choix' - coche toutes cases ou se coche quand tous sont sélectionnés
 - Ajouter le formatage automatique du champ téléphone au format 555-555-5555
+- Ajouter le changement de langue
 
 
 
@@ -35,6 +36,7 @@
 - Remettre le label à l'état inital après l'envoi du formulaire
 - Correction syntaxe nom de class pour afficher le style message de succès
 - Correction alignement des éléments du formulaire lors de l'affichage des messages d'erreurs
+- Correction du querySelector ciblant le mauvais bouton entre le bouton du changement de langue et le bouton du submit
 
 ### Modifié
 
