@@ -9,6 +9,7 @@ header{
         justify-content: center;
         gap: 15px;
         padding: 25px 0;
+        position: relative;
 
         @include BP(mobile){
             flex-direction: row;
@@ -35,6 +36,17 @@ header{
                 padding: 0;
             }
 
+        }
+
+        .liste__language{
+
+            @include BP(tablet){
+                position: absolute;
+                right: 0;
+                display: flex;
+                gap: 15px;
+            }
+            
         }
 
     }
