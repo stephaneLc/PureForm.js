@@ -1,8 +1,32 @@
 document.addEventListener("DOMContentLoaded", ()=>{
     const divForm = document.getElementById("divForm");
-    const language = 'fr';
+    const btnsLang = document.querySelectorAll(".btn__language");
+    const langDefault = 'fr';
+    let language =  document.documentElement.lang = langDefault;
 
     constructForm(divForm,language);
+    changeLanguage(language);
+
+    function changeLanguage(language){
+        
+        btnsLang.forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.lang === language);
+        });
+        
+    }
+
+    btnsLang.forEach(btn =>{
+        
+        btn.addEventListener('click', function() {
+            language = btn.dataset.lang;
+            document.documentElement.lang = language;
+            divForm.innerHTML = '';
+            constructForm(divForm,language);
+            changeLanguage(language);
+        });
+
+    });
+
 });
 
 async function getJson(divForm){
@@ -25,6 +49,7 @@ async function getJson(divForm){
 
 
 async function constructForm(divForm, language) {
+  
     try {
         const dataJson = await getJson();
 
@@ -285,7 +310,7 @@ function optionSelected(){
 
 
 async function checkFields(form, jsonData, formMessages,language) {
-    const btnSubmit = document.querySelector("button");
+    const btnSubmit = document.querySelector("button[type='submit']");
     const inputs = document.querySelectorAll("input,select,textarea");
 
     btnSubmit.addEventListener('click', function(event){
