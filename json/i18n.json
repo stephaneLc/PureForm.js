@@ -2,14 +2,26 @@
     "error" : {
         "catch" : {
             "message" : {
-                "fr" : "Une erreur est survenue, veuillez réessayer ou revenir plus tard",
-                "en" : "An error has occurred, please try again or come back later"
+                "fr" : "Une erreur est survenue, veuillez réessayer ou revenir plus tard.",
+                "en" : "An error has occurred, please try again or come back later."
             }
         },
         "data" : {
             "message" : {
-                "fr" : "Les données ne sont pas disponibles, veuillez réessayer plus tard",
-                "en" : "The data is not available, please try again later"
+                "fr" : "Les données ne sont pas disponibles, veuillez réessayer plus tard.",
+                "en" : "The data is not available, please try again later."
+            }
+        },
+        "send" : {
+            "message" : {
+                "fr" : "Une erreur est survenue lors de l'envoi, veuillez réessayer ou revenir plus tard.",
+                "en" : "An error occurred while sending, please try again or come back later."
+            }
+        },
+        "response" : {
+            "message" : {
+                "fr" : "Statut de réponse : ",
+                "en" : "Response Status :"
             }
         }
     }

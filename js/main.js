@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     let language =  document.documentElement.lang = langDefault;
 
     const i18nData = await getI18n(language);
-console.log('i18nData', i18nData);
-    constructForm(divForm,language);
+
+    constructForm(divForm,language,i18nData);
     changeLanguage(language);
 
     function changeLanguage(language){
@@ -23,7 +23,7 @@ console.log('i18nData', i18nData);
             language = btn.dataset.lang;
             document.documentElement.lang = language;
             divForm.innerHTML = '';
-            constructForm(divForm,language);
+            constructForm(divForm,language,i18nData);
             changeLanguage(language);
         });
 
@@ -56,7 +56,7 @@ async function getI18n(language){
 
 }
 
-async function getFormJson(){
+async function getFormJson(i18nData,language){
     try {
         const jsonData = await fetch("../json/formulaire.json");
         
@@ -70,18 +70,19 @@ async function getFormJson(){
 
        
     } catch (error) {
-        divForm.innerText = "Une erreur est survenu" + ' ' + error;
+        divForm.innerText = i18nData.error.data.message[language];
+        console.log('function getFormJson', error);
     }
 }
 
 
-async function constructForm(divForm, language) {
+async function constructForm(divForm, language, i18nData) {
   
     try {
-        const dataJson = await getFormJson();
+        const dataJson = await getFormJson(i18nData,language);
 
         if(!dataJson) {
-            throw new Error("Les données ne sont pas disponible");
+            throw new Error(i18nData.error.data.message[language]);
         }
 
         const titleForm = document.createElement("h2");
@@ -268,14 +269,15 @@ async function constructForm(divForm, language) {
 
         });
 
-        checkFields(form,dataJson.fields,dataJson.form.message,language);
+        checkFields(form,dataJson.fields,dataJson.form.message,i18nData,language);
         floatingLabelsOnInput();
         optionSelected();
         autoFormatPhone();
         autoCheckedOnAll();
 
     } catch (error) {
-        divForm.innerText = "Une erreur est survenu" + ' ' + error;
+        divForm.innerText = i18nData.error.data.message[language];
+        console.log('function constructForm', error);
     }
 }
 
@@ -336,7 +338,7 @@ function optionSelected(){
 }
 
 
-async function checkFields(form, jsonData, formMessages,language) {
+async function checkFields(form, jsonData, formMessages,i18nData,language) {
     const btnSubmit = document.querySelector("button[type='submit']");
     const inputs = document.querySelectorAll("input,select,textarea");
 
@@ -425,7 +427,7 @@ async function checkFields(form, jsonData, formMessages,language) {
 
         if(formValide){
             const formData = new FormData(form);
-            sendForm(formData,inputs,formMessages,language);
+            sendForm(formData,inputs,formMessages,i18nData,language);
             
         }else{
 
@@ -443,7 +445,7 @@ async function checkFields(form, jsonData, formMessages,language) {
 
 }
 
-async function sendForm(params,inputs,formMessages,language) {
+async function sendForm(params,inputs,formMessages,i18nData,language) {
     
     try {
 
@@ -468,7 +470,7 @@ async function sendForm(params,inputs,formMessages,language) {
         });
 
         if(!response.ok){
-            throw new Error(`Statut de réponse: ${response.status}`);
+            throw new Error(`${i18nData.error.response.message[language]} ${response.status}`);
         }
 
         const resultat = await response.json();
@@ -520,7 +522,8 @@ async function sendForm(params,inputs,formMessages,language) {
         floatingLabelsOnInput();
 
     } catch (error) {
-         divForm.innerText = "Une erreur est survenu" + ' ' + error;
+        divForm.innerText = i18nData.error.send.message[language];
+        console.log('function sendForm', error);
     }
 }
 
