@@ -20,6 +20,7 @@
 - Gestion automatique de la case 'Tous les choix' - coche toutes cases ou se coche quand tous sont sélectionnés
 - Ajouter le formatage automatique du champ téléphone au format 555-555-5555
 - Ajouter le changement de langue
+- Gestion des textes génériques d'erreurs via i18n.json
 
 
 
@@ -45,4 +46,5 @@
 - Optimiser le retrait du message succès ou erreur dans une même fonction
 - Rendre le nombre minimum de cases à cocher dynamique dans le message d'erreur
 - Mise en page du bloc de résultat
+- Remplacer texte des erreurs par i18n.json
 
