@@ -1,9 +1,11 @@
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", async ()=>{
     const divForm = document.getElementById("divForm");
     const btnsLang = document.querySelectorAll(".language");
     const langDefault = 'fr';
     let language =  document.documentElement.lang = langDefault;
 
+    const i18nData = await getI18n(language);
+console.log('i18nData', i18nData);
     constructForm(divForm,language);
     changeLanguage(language);
 
@@ -29,7 +31,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 });
 
-async function getJson(divForm){
+async function getI18n(language){
+    try {
+        const i18n = await fetch("../json/i18n.json");
+
+        if(!i18n.ok){
+            throw new Error(i18n.status);
+        }
+
+        const i18nJson = await i18n.json();
+
+        return i18nJson;
+
+    } catch (error) {
+        
+        if(language === 'fr'){
+            console.log("i18n n'est pas disponible", error);
+        }else{
+            console.log("i18n is not available", error);
+        }
+        
+        return null; 
+    }
+
+}
+
+async function getFormJson(){
     try {
         const jsonData = await fetch("../json/formulaire.json");
         
@@ -51,7 +78,7 @@ async function getJson(divForm){
 async function constructForm(divForm, language) {
   
     try {
-        const dataJson = await getJson();
+        const dataJson = await getFormJson();
 
         if(!dataJson) {
             throw new Error("Les données ne sont pas disponible");
