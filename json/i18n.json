@@ -1,0 +1,16 @@
+{
+    "error" : {
+        "catch" : {
+            "message" : {
+                "fr" : "Une erreur est survenue, veuillez réessayer ou revenir plus tard",
+                "en" : "An error has occurred, please try again or come back later"
+            }
+        },
+        "data" : {
+            "message" : {
+                "fr" : "Les données ne sont pas disponibles, veuillez réessayer plus tard",
+                "en" : "The data is not available, please try again later"
+            }
+        }
+    }
+}
