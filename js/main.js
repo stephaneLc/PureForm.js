@@ -69,8 +69,8 @@ async function getFormJson(i18nData,language){
         return dataJson;
 
        
-    } catch (error) {
-        divForm.innerText = i18nData.error.data.message[language];
+    } catch (error) { 
+        warningMalfunction(i18nData,language);
         console.log('function getFormJson', error);
     }
 }
@@ -82,7 +82,9 @@ async function constructForm(divForm, language, i18nData) {
         const dataJson = await getFormJson(i18nData,language);
 
         if(!dataJson) {
-            throw new Error(i18nData.error.data.message[language]);
+                  
+            return;
+            
         }
 
         const titleForm = document.createElement("h2");
@@ -276,7 +278,7 @@ async function constructForm(divForm, language, i18nData) {
         autoCheckedOnAll();
 
     } catch (error) {
-        divForm.innerText = i18nData.error.data.message[language];
+        warningMalfunction(i18nData,language);
         console.log('function constructForm', error);
     }
 }
@@ -522,7 +524,7 @@ async function sendForm(params,inputs,formMessages,i18nData,language) {
         floatingLabelsOnInput();
 
     } catch (error) {
-        divForm.innerText = i18nData.error.send.message[language];
+        warningMalfunction(i18nData,language);
         console.log('function sendForm', error);
     }
 }
@@ -593,5 +595,20 @@ function autoFormatPhone(){
         }
 
     });
+
+}
+
+function warningMalfunction(i18nData,language){
+ 
+    const warningP = document.createElement('p');
+          warningP.setAttribute("class", "message warning");
+          warningP.innerText = i18nData.error.data.message[language];
+          const form = document.getElementById("form");
+         
+          if(form){
+            form.before(warningP);
+          }else{
+            divForm.appendChild(warningP);
+          }
 
 }

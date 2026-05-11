@@ -48,4 +48,5 @@
 - Rendre le nombre minimum de cases à cocher dynamique dans le message d'erreur
 - Mise en page du bloc de résultat
 - Remplacer texte des erreurs par i18n.json
+- Centralisation de l'affichage du message d'avertissement dans une fonction dédiée
 
