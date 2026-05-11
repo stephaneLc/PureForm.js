@@ -24,5 +24,16 @@
                 "en" : "Response Status :"
             }
         }
+    },
+    "links" : {
+        "footer" : {
+            "styleGuide" : {
+                "link" : "styleguide.html",
+                "text" : {
+                    "fr" : "Guide de style",
+                    "en" : "Style guide"
+                }
+            }
+        }
     }
 }
