@@ -21,6 +21,7 @@
 - Ajouter le formatage automatique du champ téléphone au format 555-555-5555
 - Ajouter le changement de langue
 - Gestion des textes génériques d'erreurs via i18n.json
+- Détection du javascript du navigateur avec message d'avertissement
 
 
 
