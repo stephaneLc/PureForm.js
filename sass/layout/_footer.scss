@@ -27,4 +27,22 @@ footer{
 
     }
 
+    .footer__bottom{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        .link__github{
+            display: flex;
+            align-self: center;
+
+            svg{
+                width: 25px;
+                height: 25px;
+            }
+        }
+        
+    }
+
 }
