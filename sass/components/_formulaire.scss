@@ -265,6 +265,12 @@
         }
     }
 
+    &.warning{
+        color: #FFB800;
+        background-color: rgba(255, 184, 0, 0.05);
+        border-color: #FFB800;
+    }
+
 }
 
 .resultat{
