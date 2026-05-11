@@ -25,4 +25,13 @@ h3{
     font-weight: $font-height;
     color: var(--color-title-regular);
 }
+
+a{
+    text-decoration: none;
+    color: var(--link-base-color);
+
+    &:hover{
+        color: var(--link-base-color-hover);
+    }
+}
     

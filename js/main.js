@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
     constructForm(divForm,language,i18nData);
     changeLanguage(language);
+    footerNav(i18nData,language);
 
     function changeLanguage(language){
         
@@ -610,5 +611,14 @@ function warningMalfunction(i18nData,language){
           }else{
             divForm.appendChild(warningP);
           }
+
+}
+
+function footerNav(i18nData,language){
+  
+    const link = document.getElementById("guideStyle");
+    
+    link.setAttribute("href", i18nData.links.footer.styleGuide.link);
+    link.innerHTML = i18nData.links.footer.styleGuide.text[language];
 
 }

@@ -22,9 +22,7 @@
 - Ajouter le changement de langue
 - Gestion des textes génériques d'erreurs via i18n.json
 - Détection du javascript du navigateur avec message d'avertissement
-
-
-
+- Lien vers le guide des styles avec la mise en page via i18n.json
 
 ### Corrigé
 
