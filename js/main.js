@@ -82,7 +82,9 @@ async function constructForm(divForm, language, i18nData) {
         const dataJson = await getFormJson(i18nData,language);
 
         if(!dataJson) {
-            throw new Error(i18nData.error.data.message[language]);
+                  
+            return;
+            
         }
 
         const titleForm = document.createElement("h2");
