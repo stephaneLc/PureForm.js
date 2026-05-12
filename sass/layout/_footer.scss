@@ -1,0 +1,52 @@
+@use '../base' as *;
+
+footer{
+
+    p{
+        text-align: center;
+        font-size: 12px;
+    }
+
+    ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 15px;
+        list-style: none;
+
+        a{
+            text-decoration: none;
+            font-size: 0.9em;
+            
+            &.active{
+                color: $color-orange;
+                text-decoration: underline;
+            }
+
+        }
+
+    }
+
+    .footer__bottom{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        .link__github{
+            display: flex;
+            align-self: center;
+
+            svg{
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        a{
+            font-size: 12px;
+        }
+        
+    }
+
+}

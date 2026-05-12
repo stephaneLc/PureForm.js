@@ -1,0 +1,51 @@
+{
+    "projet" : {
+        "intro" : {
+            "title" :{
+                "fr" : "Contexte du projet",
+                "en" : "Project context"
+            },
+            "text" : {
+                "fr" : "Formulaire généré dynamiquement avec contrainte volontaire à partir d'un JSON, avec validation côté client, support multilingue et traitement via PHP. Il a été développé en JavaScript vanille et SASS pour la mise en page. ",
+                "en" : "Dynamically generated form with a deliberate constraint from a JSON file, with client-side validation, multilingual support, and processing via PHP. It was developed using vanilla JavaScript and SASS for layout."
+            }
+        }
+    },
+    "error" : {
+        "catch" : {
+            "message" : {
+                "fr" : "Une erreur est survenue, veuillez réessayer ou revenir plus tard.",
+                "en" : "An error has occurred, please try again or come back later."
+            }
+        },
+        "data" : {
+            "message" : {
+                "fr" : "Les données ne sont pas disponibles, veuillez réessayer plus tard.",
+                "en" : "The data is not available, please try again later."
+            }
+        },
+        "send" : {
+            "message" : {
+                "fr" : "Une erreur est survenue lors de l'envoi, veuillez réessayer ou revenir plus tard.",
+                "en" : "An error occurred while sending, please try again or come back later."
+            }
+        },
+        "response" : {
+            "message" : {
+                "fr" : "Statut de réponse : ",
+                "en" : "Response Status :"
+            }
+        }
+    },
+    "links" : {
+        "footer" : {
+            "styleGuide" : {
+                "link" : "styleguide.html",
+                "text" : {
+                    "fr" : "Guide de style",
+                    "en" : "Style guide"
+                }
+            }
+        }
+    }
+}

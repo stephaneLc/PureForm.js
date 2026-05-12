@@ -1,0 +1,285 @@
+@use '../base' as *;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.form{
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 25px;
+
+    @include BP(tablet){
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    &__group{
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 0;
+
+        &:has(fieldset){
+            display: block;
+            height: 100%;
+        }
+
+    }
+
+    &__field{
+        position: relative;
+        width: 100%;
+        margin-top: auto;
+
+        label{
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.2s ease;
+        }
+
+        input{
+
+            &:focus + label,
+            & + label.active{
+                font-size: 13px;
+                top: 0;
+                left: 8px;
+                transform: translateY(-50%);
+                background: linear-gradient(to bottom, $color-gray 50%, $color-white 50%);
+            }
+
+            &:has(+ label.active){
+                border-color: var(--field-base-active-color);
+
+            }
+            
+
+        }
+
+    }
+
+    &__textarea,
+    &__select{
+        height: 100%;
+
+        label{
+            display: block;
+            margin-bottom: 15px;
+
+        }
+
+    }
+
+    input,
+    select,
+    textarea{
+        background-color: var(--field-base-bck-color);
+        width: 100%;
+        border-radius: 4px;
+        border: var(--field-base-border-size) solid var(--field-base-border-color);
+        padding: 8px;
+
+        &:focus {
+            border: var(--field-base-border-size-focus) solid var(--field-base-border-color-focus);
+            outline: none;
+        }
+
+        &:focus-visible{
+            outline: var(--field-base-focus-visible-size) solid var(--field-base-focus-visible-color);
+        }
+
+    }
+
+    input[type="radio"]{
+        appearance: none;
+        width: var(--input-radio-size);
+        height: var(--input-radio-size);
+        border: var(--input-radio-border-size) solid var(--input-radio-border-color);
+        border-radius: var(--input-radio-border-radius);
+        outline: none;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:focus {
+            border: var(--input-radio-border-size) solid var(--input-radio-border-color);
+            outline: none;
+        }
+
+        &:checked{
+            background-color: var(--input-radio-checked-bck-color);
+            box-shadow: 0 0 0 2px $color-white, inset 0 0 0 2px $color-white; 
+            border: var(--input-radio-border-size) solid var(--input-radio-checked-border-color);
+        }
+
+        &:hover{
+            border-color: var(--input-radio-border-color-hover);
+        }
+
+    }
+
+    label:has(input[type="radio"]){
+        
+         &:has(input[type="radio"]:checked){
+            color: var(--input-label-radio-txt-color);
+            font-weight: var(--input-label-radio-txt-bold);
+         }
+
+    }
+
+    input[type="checkbox"] {
+        appearance: none;
+        width: var(--input-checkbox-size);
+        height: var(--input-checkbox-size);
+        border: var(--input-checkbox-border-size) solid var(--input-checkbox-border-color);
+        border-radius: 3px;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:checked{
+            background-color: var(--input-checkbox-checked-bck-color);
+            box-shadow: inset 0 0 0 2px $color-white; 
+            border: var(--input-checkbox-checked-border-size) solid var(--input-checkbox-checked-border-color);
+        }
+
+        &:hover{
+            border-color: var(--input-checkbox-border-color-hover);
+        }
+
+    }
+
+    label:has(input[type="checkbox"]){
+        position: relative;
+        user-select: none;
+
+        &:has(input[type="checkbox"]:checked){
+            color: var(--input-label-checkbox-txt-color);
+            font-weight: var(--input-label-checkbox-txt-bold);
+
+            &::after{
+                content: "";
+                display: inline-block;
+                width: calc(var(--input-checkbox-size) * 0.25);
+                height: calc(var(--input-checkbox-size) * 0.55);
+                border: var(--input-check-hook-border-size) solid var(--input-check-hook-border-color);
+                border-top: none;
+                border-left: none;
+                transform: rotate(45deg);
+                vertical-align: middle;
+                position: absolute;
+                left: calc(var(--input-checkbox-size) / 2);
+                top: calc(var(--input-checkbox-size) / 2 - 2px);
+                transform: translate(-50%, -50%) rotate(45deg);
+                z-index: 1;
+            }
+
+        }
+
+    }
+
+
+    select{
+        
+        &:focus {
+            border: var(--select-border-size-focus) solid var(--select-border-color-focus);
+            outline: none;
+        }
+
+        &.active{
+            border-color: var(--select-border-color-option-selected);
+        }
+
+    }
+
+    fieldset {
+
+        margin: 0;
+        padding: 0;
+        border: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+        justify-items: start;
+        gap: 10px;
+
+        legend {
+            grid-column: 1 / -1;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        label{
+            display: flex; 
+            align-items: center;
+            gap: 10px;            
+        }
+
+    }
+
+    .btn{
+        
+        &__primary{
+            display: block;
+            max-width: 350px;
+            width: 100%;
+            margin: 0 auto;
+
+            @include BP(tablet){
+                grid-column: span 2;
+            }
+
+        }
+
+    }
+
+}
+
+.message{
+    border-radius: 5px;
+    padding: 8px;
+    border-width: 1px;
+    border-style: solid;
+
+    &.succes{
+        color: #00c853;
+        background-color: rgba(0, 200, 83, 0.05);
+        border-color: #00c853;
+    }
+
+    &.error{
+        color: #ff2d00 ;
+        background-color: rgba(255, 45, 0, 0.05);
+        border-color:#ff2d00;
+        width: 100%;
+        display: none;
+
+        &.generic{
+            display: block;
+            text-align: center;
+        }
+    }
+
+    &.warning{
+        color: #FFB800;
+        background-color: rgba(255, 184, 0, 0.05);
+        border-color: #FFB800;
+    }
+
+}
+
+.resultat{
+    border: 1px solid black;
+    padding: 15px;
+    margin-bottom: 15px;
+    width: fit-content;
+
+    strong{
+        text-transform: capitalize;
+    }
+}
