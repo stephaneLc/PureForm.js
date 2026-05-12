@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
 async function getI18n(language){
     try {
-        const i18n = await fetch("../json/i18n.json");
+        const i18n = await fetch("json/i18n.json");
 
         if(!i18n.ok){
             throw new Error(i18n.status);
@@ -59,7 +59,7 @@ async function getI18n(language){
 
 async function getFormJson(i18nData,language){
     try {
-        const jsonData = await fetch("../json/formulaire.json");
+        const jsonData = await fetch("json/formulaire.json");
         
         if(!jsonData.ok){
             throw new Error(jsonData.status);
