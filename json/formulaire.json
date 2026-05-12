@@ -28,8 +28,8 @@
             "id" : "firstName",
             "type" : "text",
             "label" : {
-                "fr" : "Prénom",
-                "en" : "First name"
+                "fr" : "Prénom*",
+                "en" : "First name*"
             },
             "name" : "firstName",
             "validation" : {
@@ -65,8 +65,8 @@
             "id" : "email",
             "type" : "email",
             "label" : {
-                "fr" : "Courriel",
-                "en" : "Email"
+                "fr" : "Courriel*",
+                "en" : "Email*"
             },
             "name" : "email",
             "validation" : {
@@ -92,8 +92,8 @@
             "id" : "phoneNumber",
             "type" : "tel",
             "label" : {
-                "fr" : "Téléphone",
-                "en" : "Phone"
+                "fr" : "Téléphone*",
+                "en" : "Phone*"
             },
             "name" : "phoneNumber",
             "validation" : {
@@ -119,8 +119,8 @@
             "id" : "availability",
             "type" : "radio",
             "label" : {
-                "fr" : "Disponibilité",
-                "en" : "Availability"
+                "fr" : "Disponibilité*",
+                "en" : "Availability*"
             },
             "name" : "availability",
             "validation" : {
@@ -164,8 +164,8 @@
             "id" : "skill",
             "type" : "checkbox",
             "label" : {
-                "fr" : "Compétence",
-                "en" : "skill"
+                "fr" : "Compétence*",
+                "en" : "skill*"
             },
             "name" : "skill",
             "validation" : {
@@ -236,8 +236,8 @@
             "id" : "experience",
             "type" : "",
             "label" : {
-                "fr" : "Votre expérience",
-                "en" : "Your experience"
+                "fr" : "Votre expérience*",
+                "en" : "Your experience*"
             },
             "name" : "experience",
             "validation" : {
