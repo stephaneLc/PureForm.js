@@ -1,4 +1,16 @@
 {
+    "projet" : {
+        "intro" : {
+            "title" :{
+                "fr" : "Contexte du projet",
+                "en" : "Project context"
+            },
+            "text" : {
+                "fr" : "Formulaire généré dynamiquement avec contrainte volontaire à partir d'un JSON, avec validation côté client, support multilingue et traitement via PHP. Il a été développé en JavaScript vanille et SASS pour la mise en page. ",
+                "en" : "Dynamically generated form with a deliberate constraint from a JSON file, with client-side validation, multilingual support, and processing via PHP. It was developed using vanilla JavaScript and SASS for layout."
+            }
+        }
+    },
     "error" : {
         "catch" : {
             "message" : {
