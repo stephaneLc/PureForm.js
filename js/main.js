@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
     constructForm(divForm,language,i18nData);
     changeLanguage(language);
+    introTextProject(i18nData,language);
     footerNav(i18nData,language);
 
     function changeLanguage(language){
@@ -26,6 +27,8 @@ document.addEventListener("DOMContentLoaded", async ()=>{
             divForm.innerHTML = '';
             constructForm(divForm,language,i18nData);
             changeLanguage(language);
+            introTextProject(i18nData,language);
+            footerNav(i18nData,language);
         });
 
     });
@@ -621,4 +624,18 @@ function footerNav(i18nData,language){
     link.setAttribute("href", i18nData.links.footer.styleGuide.link);
     link.innerHTML = i18nData.links.footer.styleGuide.text[language];
 
+}
+
+function introTextProject(i18nData,language){
+    const textIntro = document.getElementById("introText");
+    textIntro.innerHTML = "";
+
+    const introTitle = document.createElement("h2");
+    const text = document.createElement("p");
+
+    introTitle.innerHTML = i18nData.projet.intro.title[language];
+    text.innerHTML = i18nData.projet.intro.text[language];
+
+    textIntro.appendChild(introTitle);
+    textIntro.appendChild(text);
 }
